@@ -16,12 +16,6 @@ export default function Bible() {
             const chapterContent = JSON.parse(localStorage.getItem(`${bookMark.bookName}-${bookMark.chapter}-content`));
             const listOfBooks = await getListOfBooks();
             const listOfChapters = await getListOfChapters();
-            setDropDownBooks(listOfBooks);
-            setDropDownChapters(listOfChapters);
-            setButtonNextDisabled(bookMark.bookName === "Apocalipse" && bookMark.chapter === 21);
-            setButtonPreviousDisabled(bookMark.bookName === "Gênesis" && bookMark.chapter === 1);
-            localStorage.setItem(bookMark.testament, bookMark.bookName);
-            localStorage.setItem(bookMark.bookName, bookMark.chapter);
             if (chapterContent === null) {
                 const { bookName, chapter } = bookMark;
                 const verseObject = await api.get(`/bible/${bookName}/${chapter}`)
@@ -30,6 +24,12 @@ export default function Bible() {
             } else {
                 setTextToShow(chapterContent);
             }
+            setDropDownBooks(listOfBooks);
+            setDropDownChapters(listOfChapters);
+            setButtonNextDisabled(bookMark.bookName === "Apocalipse" && bookMark.chapter === 21);
+            setButtonPreviousDisabled(bookMark.bookName === "Gênesis" && bookMark.chapter === 1);
+            localStorage.setItem(bookMark.testament, bookMark.bookName);
+            localStorage.setItem(bookMark.bookName, bookMark.chapter);
         }
         fetchData();
         localStorage.setItem("bookMark", JSON.stringify(bookMark));
@@ -57,8 +57,8 @@ export default function Bible() {
             const listOfChapters = [];
             const response = await api.get(`/bible/@${bookName}`);
             const chaptersCount = response.data.chaptersCount;
-            for (let i = 1; i < chaptersCount; i++) {
-                listOfChapters.push(i)
+            for (let i = 0; i < chaptersCount; i++) {
+                listOfChapters.push(i + 1)
             }
             localStorage.setItem(`${bookName}-listOfChapters`, JSON.stringify(listOfChapters));
             return listOfChapters;
