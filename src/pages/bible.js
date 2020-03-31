@@ -26,7 +26,7 @@ export default function Bible() {
             }
             setDropDownBooks(listOfBooks);
             setDropDownChapters(listOfChapters);
-            setButtonNextDisabled(bookMark.bookName === "Apocalipse" && bookMark.chapter === 21);
+            setButtonNextDisabled(bookMark.bookName === "Apocalipse" && bookMark.chapter === 22);
             setButtonPreviousDisabled(bookMark.bookName === "Gênesis" && bookMark.chapter === 1);
             localStorage.setItem(bookMark.testament, bookMark.bookName);
             localStorage.setItem(bookMark.bookName, bookMark.chapter);
@@ -75,8 +75,8 @@ export default function Bible() {
         const chapter = listOfChapters[ chapterIndex ];
         const bookIndex = listOfBooks.indexOf(bookMark.bookName) + 1;
         const bookName = listOfBooks[ bookIndex ];
-        if (bookMark.bookName === "Apocalipse" && bookMark.chapter === 21) {
-            alert('Não há mais capítulos anteriores.');
+        if (bookMark.bookName === "Apocalipse" && bookMark.chapter === 22) {
+            alert('Não há mais próximos capítulos');
             return;
         }
         if (bookMark.bookName === "Malaquias" && bookMark.chapter === 3) {
@@ -121,7 +121,7 @@ export default function Bible() {
             setBookMark({ ...bookMark, bookName, chapter })
             return;
         }
-        console.log(`Error: nextChapter function returned a invalid state.`)
+        console.log(`Error: previousChapter function returned a invalid state.`)
     }
     return (
         <div>
