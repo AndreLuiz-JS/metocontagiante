@@ -1,21 +1,29 @@
-import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
+import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import NavBar from './components/NavBar'
+import { ThemeProvider } from 'styled-components';
+
+import dark from './styles/themes/dark';
+import GlobalStyle from './styles/Global';
+import Navbar from './components/Navbar';
+
 import Routes from './routes';
 
-class App extends Component {
-
-  render() {
-    return (
-      <Container>
-        <BrowserRouter>
-          <NavBar />
-          <Routes />
-        </BrowserRouter>
-      </Container>
-    )
+export default function App() {
+  const [ navbarState, setNavbarState ] = useState(false);
+  function handleNavbar() {
+    setNavbarState(!navbarState);
   }
-}
 
-export default App;
+  return (
+    <ThemeProvider theme={dark}>
+      <BrowserRouter>
+        <Navbar
+          navbarState={navbarState}
+          handleNavbar={handleNavbar} />
+        <GlobalStyle />
+        <Routes />
+      </BrowserRouter>
+    </ThemeProvider>
+  )
+
+}

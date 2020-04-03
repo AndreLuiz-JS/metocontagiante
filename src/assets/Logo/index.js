@@ -8,7 +8,7 @@ export default function Logo(props) {
     const [ filter, setFilter ] = useState('');
     if (color === props.color) return <img src={logoImage} alt="" width={props.size} style={{ filter }} />
     else {
-        const rgb = hexToRgb(props.color);
+        const rgb = hexToRgb(props.color || '#fff');
         const newColor = new Color(rgb[ 0 ], rgb[ 1 ], rgb[ 2 ]);
         const solver = new Solver(newColor);
         const result = solver.solve();
