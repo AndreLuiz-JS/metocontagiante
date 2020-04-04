@@ -3,26 +3,6 @@ import Select from 'react-select';
 import styled from 'styled-components';
 import dark from '../../styles/themes/dark';
 
-export const Navbar = styled.nav`
-    position: sticky;
-    bottom:1vh;
-    left:0;
-    right:0;
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    max-width:1280px;
-    margin: 15px auto 0;
-    justify-content: space-between;
-    align-content:center;
-    z-index:1;
-    background: ${props => props.theme.backgroundSecondary};
-    filter: brightness(150%) invert();
-    & :last-child{
-        justify-self:end;
-    }
-`
-
 export const Dropdown = styled.ul`
     position: sticky;
     z-index:1;
@@ -118,23 +98,47 @@ export const Section = styled.section`
         }
     }
 `
+export const ButtonGroup = styled.nav`
+    position: sticky;
+    bottom:1vh;
+    left:0;
+    right:0;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width:1280px;
+    margin: 15px auto 0;
+    justify-content: space-between;
+    align-content:center;
+    z-index:1;
+    background: ${props => props.theme.backgroundSecondary};
+    & :last-child{
+        justify-self:end;
+    }
+`
+
 export const Button = styled.button`
-    margin: 0 10px;
-    width:150px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin: 10px;
+    padding: 10px;
+    width:80px;
     height:30px;
     border-radius:8px;
-    color:${props => props.theme.colors.primary};
-    background: ${props => props.theme.colors.backgroundSecondary}ee;
+    background-color: ${props => props.theme.colors.primary}ee;
+    color:${props => props.theme.colors.background};
     border:none;
     transition: all 0.3s;
-    :hover {
-        color:${props => props.theme.colors.secondary};
-        filter:brightness(140%) sepia(20%);
+    :hover{
+        background-color: ${props => props.theme.colors.effect};
+        box-shadow: 0 0 5px ${props => props.theme.colors.effect};
     }
     :disabled{
-        filter:brightness(40%) sepia(20%);
-        :hover{
-            color:${props => props.theme.colors.primary};
-        }
+        opacity:0;
     }
+    span {
+        color:${props => props.theme.colors.background};
+    }
+
 `
