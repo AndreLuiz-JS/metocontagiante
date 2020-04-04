@@ -3,29 +3,10 @@ import Select from 'react-select';
 import styled from 'styled-components';
 import dark from '../../styles/themes/dark';
 
-export const Navbar = styled.nav`
-    position: sticky;
-    bottom:1vh;
-    left:0;
-    right:0;
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    max-width:1280px;
-    margin: 15px auto 0;
-    justify-content: space-between;
-    align-content:center;
-    z-index:1;
-    background: ${props => props.theme.backgroundSecondary};
-    filter: brightness(150%) invert();
-    & :last-child{
-        justify-self:end;
-    }
-`
-
 export const Dropdown = styled.ul`
-    position: fixed;
-    top:1;
+    position: sticky;
+    z-index:1;
+    top:0;
     left:0;
     right:0;
     max-width:1280px;
@@ -37,7 +18,7 @@ export const Dropdown = styled.ul`
     background-color:${props => props.theme.colors.background};
     border-radius: 8px;
 `
-const customStyles = {
+const customDropDownStyle = {
     input: (provided) => ({
         ...provided,
         color: dark.colors.text,
@@ -90,36 +71,16 @@ export const DropdownItem = (props) => (
         value={props.value}
         onChange={props.onChange}
         options={props.options}
-        styles={customStyles}
+        styles={customDropDownStyle}
         placeholder={props.placeholder}
     />
 )
 
-export const Button = styled.button`
-    margin: 0 10px;
-    width:150px;
-    height:30px;
-    border-radius:8px;
-    color:${props => props.theme.colors.primary};
-    background: ${props => props.theme.colors.backgroundSecondary};
-    border:none;
-    transition: all 0.3s;
-    :hover {
-        color:${props => props.theme.colors.secondary};
-        filter:brightness(140%) sepia(20%);
-    }
-    :disabled{
-        filter:brightness(40%) sepia(20%);
-        :hover{
-            color:${props => props.theme.colors.primary};
-        }
-    }
-`
 export const Section = styled.section`
     display:flex;
     flex-direction:column;
     max-width:1280px;
-    font-size:1.4rem;
+    font-size:2rem;
     border-radius: 10px;
     margin: 0 auto;
     padding: 80px 15px 15px;
@@ -136,4 +97,47 @@ export const Section = styled.section`
             }
         }
     }
+`
+export const ButtonGroup = styled.nav`
+    position: sticky;
+    bottom:1vh;
+    left:0;
+    right:0;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    max-width:1280px;
+    margin: 15px auto 0;
+    justify-content: space-around;
+    align-content:center;
+    z-index:1;
+    background: ${props => props.theme.backgroundSecondary};
+    & :last-child{
+        justify-self:end;
+    }
+`
+
+export const Button = styled.button`
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin: 10px;
+    padding: 10px;
+    width:80px;
+    border-radius:8px;
+    background-color: ${props => props.theme.colors.primary}ee;
+    color:${props => props.theme.colors.background};
+    border:none;
+    transition: all 0.3s;
+    :hover{
+        background-color: ${props => props.theme.colors.effect};
+        box-shadow: 0 0 5px ${props => props.theme.colors.effect};
+    }
+    :disabled{
+        opacity:0;
+    }
+    span {
+        color:${props => props.theme.colors.background};
+    }
+
 `

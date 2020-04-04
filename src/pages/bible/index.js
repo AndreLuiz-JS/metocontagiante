@@ -1,8 +1,11 @@
 import React, { useLayoutEffect, useState } from 'react';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import api from '../../services/api';
+import ScrollTopButton from '../../components/ScrollTopButton';
 
-import { Navbar, Dropdown, DropdownItem, Button, Section } from './styles';
+import { ButtonGroup, Dropdown, DropdownItem, Button, Section } from './styles';
+
 
 export default function Bible() {
     const listOfTestaments = [ 'Antigo Testamento', 'Novo Testamento' ];
@@ -34,6 +37,7 @@ export default function Bible() {
             localStorage.setItem("bookMark", JSON.stringify(bookMark));
             localStorage.setItem(bookMark.testament, bookMark.bookName);
             localStorage.setItem(bookMark.bookName, bookMark.chapter);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         (bookMark.testament === "") ? setInitialState() : fetchData();
@@ -202,14 +206,15 @@ export default function Bible() {
                     </p>
                 ))}
             </Section>
-            <Navbar >
+            <ButtonGroup >
                 <Button disabled={buttonPreviousDisabled} onClick={previousChapter}>
-                    {'<Anterior'}
+                    <FiChevronLeft size={20} /><span>Anterior</span>
                 </Button>
+                <ScrollTopButton maxScreenSizeVisibility={900} />
                 <Button disabled={buttonNextDisabled} onClick={nextChapter}>
-                    {'Próximo>'}
+                    <span>Próximo</span><FiChevronRight size={20} />
                 </Button>
-            </Navbar>
+            </ButtonGroup>
         </div >
     )
 

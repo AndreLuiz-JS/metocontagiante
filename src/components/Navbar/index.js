@@ -7,6 +7,7 @@ import Brand from "./Brand";
 import links from './links';
 import BurgerButton from "./BurgerButton";
 import CollapseMenu from "./CollapseMenu";
+const disableBurguerMenuScreenSize = 900;
 
 
 const Navbar = (props) => {
@@ -24,7 +25,7 @@ const Navbar = (props) => {
     <>
       <NavBar style={barAnimation}>
         <FlexContainer>
-          <Brand />
+          <Brand centerMaxSize={disableBurguerMenuScreenSize} />
           <NavLinks style={linkAnimation}>
             {links.map((link, index) => {
               return (
@@ -43,6 +44,7 @@ const Navbar = (props) => {
       <CollapseMenu
         navbarState={props.navbarState}
         handleNavbar={props.handleNavbar}
+        displayMaxSize={disableBurguerMenuScreenSize - 1}
       />
     </>
   )
@@ -53,36 +55,36 @@ export default Navbar
 const NavBar = styled(animated.nav)`
   position: sticky;
   display:flex;
-  align-self: center;
-  justify-self:space-between;
+  align-items:center;
+  justify-content:space-between;
   width: 100%;
   padding: 10px 0;
   margin: 0 auto;
   border-radius: 0 0 12px 12px;
-  min-width:860px;
+  min-width:${disableBurguerMenuScreenSize - 20}px;
   max-width:1280px;
   top: 0;
   left: 0;
   background: ${props => props.theme.colors.background};
   z-index: 1;
-  font-size: 1.4rem;
-  @media(max-width:860px){
+  @media(max-width:${disableBurguerMenuScreenSize + 'px'}){
       width:100%;
       min-width:300px;
   }
 `;
 
 const FlexContainer = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: 350px 500px;
-  margin: 0 auto;
+  width: 100vw;
+  display: flex;
   padding: 0 15px;;
   align-content: center;
   justify-content: space-between;
   height: 5rem;
-    @media(max-width:860px){
-        grid-template-columns: auto 40px;
+    @media(max-width:${disableBurguerMenuScreenSize}px){
+      & a {
+        width:100vw;
+        padding-left: 15px;
+      }
   }
 
 `;
@@ -92,7 +94,9 @@ const NavLinks = styled(animated.ul)`
   justify-self: end;
   list-style-type: none;
   margin: auto 0;
-  @media (max-width: 860px) {
+  font-size: 1.3rem;
+
+  @media (max-width: ${disableBurguerMenuScreenSize}px) {
     display: none;
     visibility: hidden;
   }
@@ -118,7 +122,7 @@ const BurgerWrapper = styled.div`
   margin: auto 0 auto auto;
   justify-content: end;
 
-  @media (min-width: 859px) {
+  @media (min-width: ${disableBurguerMenuScreenSize - 1}px) {
     display: none;
   }
 `;

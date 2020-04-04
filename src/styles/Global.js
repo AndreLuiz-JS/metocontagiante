@@ -18,6 +18,7 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
     margin-bottom: 50px;
+    overflow-x:hidden;
   }
 `;
 
