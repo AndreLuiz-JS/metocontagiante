@@ -34,6 +34,7 @@ export default function Bible() {
             localStorage.setItem("bookMark", JSON.stringify(bookMark));
             localStorage.setItem(bookMark.testament, bookMark.bookName);
             localStorage.setItem(bookMark.bookName, bookMark.chapter);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         (bookMark.testament === "") ? setInitialState() : fetchData();
