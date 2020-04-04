@@ -2,8 +2,10 @@ import React, { useLayoutEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import api from '../../services/api';
+import ScrollTopButton from '../../components/ScrollTopButton';
 
 import { ButtonGroup, Dropdown, DropdownItem, Button, Section } from './styles';
+
 
 export default function Bible() {
     const listOfTestaments = [ 'Antigo Testamento', 'Novo Testamento' ];
@@ -208,6 +210,7 @@ export default function Bible() {
                 <Button disabled={buttonPreviousDisabled} onClick={previousChapter}>
                     <FiChevronLeft size={20} /><span>Anterior</span>
                 </Button>
+                <ScrollTopButton />
                 <Button disabled={buttonNextDisabled} onClick={nextChapter}>
                     <span>Próximo</span><FiChevronRight size={20} />
                 </Button>

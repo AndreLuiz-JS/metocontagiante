@@ -104,11 +104,11 @@ export const ButtonGroup = styled.nav`
     left:0;
     right:0;
     display:grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
     max-width:1280px;
     margin: 15px auto 0;
-    justify-content: space-between;
+    justify-content: space-around;
     align-content:center;
     z-index:1;
     background: ${props => props.theme.backgroundSecondary};
@@ -124,7 +124,6 @@ export const Button = styled.button`
     margin: 10px;
     padding: 10px;
     width:80px;
-    height:30px;
     border-radius:8px;
     background-color: ${props => props.theme.colors.primary}ee;
     color:${props => props.theme.colors.background};
