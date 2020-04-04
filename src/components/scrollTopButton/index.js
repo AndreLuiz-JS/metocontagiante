@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoIosArrowDropupCircle } from 'react-icons/io';
 
-const ScrollTopButton = () => (
-  <Button>
+const ScrollTopButton = (props) => (
+  <Button maxScreenSizeVisibility={props.maxScreenSizeVisibility}>
     <a href="#" onClick={moveTop()}>
       <IoIosArrowDropupCircle size={50} />
     </a>
@@ -28,6 +28,9 @@ const Button = styled.div`
         filter: drop-shadow( 0 0 8px ${props => props.theme.colors.effect}aa)
       }
     }
+  }
+  @media(min-width:${props => props.maxScreenSizeVisibility}px){
+    visibility:hidden;
   }
 `
 

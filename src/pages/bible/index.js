@@ -210,7 +210,7 @@ export default function Bible() {
                 <Button disabled={buttonPreviousDisabled} onClick={previousChapter}>
                     <FiChevronLeft size={20} /><span>Anterior</span>
                 </Button>
-                <ScrollTopButton />
+                <ScrollTopButton maxScreenSizeVisibility={900} />
                 <Button disabled={buttonNextDisabled} onClick={nextChapter}>
                     <span>Próximo</span><FiChevronRight size={20} />
                 </Button>
