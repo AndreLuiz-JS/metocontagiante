@@ -124,7 +124,7 @@ export const Button = styled.button`
     height:30px;
     border-radius:8px;
     color:${props => props.theme.colors.primary};
-    background: ${props => props.theme.colors.backgroundSecondary};
+    background: ${props => props.theme.colors.backgroundSecondary}ee;
     border:none;
     transition: all 0.3s;
     :hover {
