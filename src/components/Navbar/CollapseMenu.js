@@ -15,7 +15,9 @@ const CollapseMenu = (props) => {
           range: [ 0, 0.2, 0.3, 1 ],
           output: [ 0, -20, 0, -200 ],
         }).interpolate(openValue => `translate3d(0, ${openValue}px, 0`),
-      }}
+      }
+      }
+        displayMaxSize={props.displayMaxSize}
       >
         <NavLinks>
           {links.map((link, index) => {
@@ -34,11 +36,14 @@ export default CollapseMenu;
 
 const CollapseWrapper = styled(animated.div)`
   background: ${props => props.theme.colors.background};
-  position: relative;
+  position: sticky;
   border-radius: 12px;
-  top: 0;
+  top: 70px;
   left: 0;
   right: 0;
+    @media (min-width: ${props => props.displayMaxSize}px) {
+      display:none;
+    }
 `;
 
 const NavLinks = styled.ul`
@@ -48,14 +53,11 @@ const NavLinks = styled.ul`
   grid-template-columns: 1fr 1fr 1fr;
   align-items:center;
   justify-items:center;
-  @media (min-width: 859px) {
-    display: none;
-  }
   & li {
     transition: all 300ms linear 0s;
   }
   & a {
-    font-size: 1.4rem;
+    font-size: 1.9rem;
     line-height: 2;
     color: ${props => props.theme.colors.primary};
     text-transform: uppercase;
