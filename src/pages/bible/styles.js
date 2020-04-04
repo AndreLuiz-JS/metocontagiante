@@ -24,8 +24,9 @@ export const Navbar = styled.nav`
 `
 
 export const Dropdown = styled.ul`
-    position: fixed;
-    top:1;
+    position: sticky;
+    z-index:1;
+    top:0;
     left:0;
     right:0;
     max-width:1280px;
@@ -37,7 +38,7 @@ export const Dropdown = styled.ul`
     background-color:${props => props.theme.colors.background};
     border-radius: 8px;
 `
-const customStyles = {
+const customDropDownStyle = {
     input: (provided) => ({
         ...provided,
         color: dark.colors.text,
@@ -90,11 +91,33 @@ export const DropdownItem = (props) => (
         value={props.value}
         onChange={props.onChange}
         options={props.options}
-        styles={customStyles}
+        styles={customDropDownStyle}
         placeholder={props.placeholder}
     />
 )
 
+export const Section = styled.section`
+    display:flex;
+    flex-direction:column;
+    max-width:1280px;
+    font-size:2rem;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 80px 15px 15px;
+    text-align:justify;
+    text-align-last: left;
+    text-indent: 4rem;
+    background-color:${props => props.theme.colors.backgroundSecondary};
+    & p {
+        padding: 1rem;
+        & span {
+            color:${props => props.theme.colors.text};
+            & span {
+                color:${props => props.theme.colors.secondary};
+            }
+        }
+    }
+`
 export const Button = styled.button`
     margin: 0 10px;
     width:150px;
@@ -112,28 +135,6 @@ export const Button = styled.button`
         filter:brightness(40%) sepia(20%);
         :hover{
             color:${props => props.theme.colors.primary};
-        }
-    }
-`
-export const Section = styled.section`
-    display:flex;
-    flex-direction:column;
-    max-width:1280px;
-    font-size:1.4rem;
-    border-radius: 10px;
-    margin: 0 auto;
-    padding: 80px 15px 15px;
-    text-align:justify;
-    text-align-last: left;
-    text-indent: 4rem;
-    background-color:${props => props.theme.colors.backgroundSecondary};
-    & p {
-        padding: 1rem;
-        & span {
-            color:${props => props.theme.colors.text};
-            & span {
-                color:${props => props.theme.colors.secondary};
-            }
         }
     }
 `
