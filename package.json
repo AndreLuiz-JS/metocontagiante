@@ -3,7 +3,8 @@
 	"description": "App da Metodista Contagiante em São Pedro da Aldeia/RJ",
 	"version": "0.1.0",
 	"engines": {
-		"node": "^13.10.1"
+		"node": "^13.10.1",
+		"yarn": "^1.22.4"
 	},
 	"private": true,
 	"dependencies": {
