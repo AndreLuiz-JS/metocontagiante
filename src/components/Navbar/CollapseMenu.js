@@ -50,7 +50,8 @@ const NavLinks = styled.ul`
   list-style-type: none;
   padding: 2rem 1rem 2rem 2rem;
   display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap:10px;
   align-items:center;
   justify-items:center;
   & li {
