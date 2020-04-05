@@ -83,7 +83,7 @@ export const Section = styled.section`
     font-size:2rem;
     border-radius: 10px;
     margin: 0 auto;
-    padding: 80px 15px 15px;
+    padding: 15px;
     text-align:justify;
     text-align-last: left;
     text-indent: 4rem;
@@ -103,12 +103,11 @@ export const ButtonGroup = styled.nav`
     bottom:1vh;
     left:0;
     right:0;
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display:flex;
     width: 100%;
     max-width:1280px;
     margin: 15px auto 0;
-    justify-content: space-around;
+    justify-content: space-between;
     align-content:center;
     z-index:1;
     background: ${props => props.theme.backgroundSecondary};

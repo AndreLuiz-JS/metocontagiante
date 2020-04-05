@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Logo from '../../assets/Logo';
 
 const Brand = (props) => (
-    <LinkContainer to="/" centerMaxSize={props.centerMaxSize}>
+    <LinkContainer to="/">
         <Logo size={50} color='#fff' />
         <span>Metodista Contagiante</span>
     </LinkContainer>
