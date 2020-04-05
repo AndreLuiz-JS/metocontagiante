@@ -39,9 +39,8 @@ export default function Bible() {
             localStorage.setItem(bookMark.bookName, bookMark.chapter);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
         (bookMark.testament === "") ? setInitialState() : fetchData();
-
+        //eslint-disable-next-line
     }, [ bookMark ]);
 
     async function setInitialState() {
