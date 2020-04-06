@@ -9,7 +9,7 @@ export default function Maps() {
         const lat = pos.coords.latitude;
         const long = pos.coords.longitude;
         setPosition({ lat, long })
-    }, () => { }, { enableHighAccuracy: true });
+    }, () => { }, { enableHighAccuracy: true, maximumAge: 60000, timeout: 60000 });
 
     useEffect(() => {
         if (position !== {}) {
