@@ -2,20 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { Container, StyledLink, StyledMap } from './styles';
 
 export default function Maps() {
-    const [ position, setPosition ] = useState({});
+    const [ position, setPosition ] = useState({ lat: null, long: null });
     const [ routeLink, setRouteLink ] = useState('https://maps.google.com/maps?ll=-22.832806,-42.143218&z=16&t=m&hl=pt-BR&gl=BR&mapclient=embed&daddr=Metodista%20Contagiante%20R.%20Francisco%20de%20Souza%20Beltr%C3%A3o%2C%20318%20-%20Balneario%20das%20Conchas%20S%C3%A3o%20Pedro%20da%20Aldeia%20-%20RJ%2028949-374@-22.8328057,-42.143218');
 
-    navigator.geolocation.watchPosition((pos) => {
-        const lat = pos.coords.latitude;
-        const long = pos.coords.longitude;
-        setPosition({ lat, long })
-    }, () => { }, { enableHighAccuracy: true, maximumAge: 60000, timeout: 60000 });
-
     useEffect(() => {
-        if (position !== {}) {
-            if (position.lat !== undefined && position.long !== undefined) {
+        if (position.lat !== undefined
+            && position.lat !== null
+            && position.long !== undefined
+            && position.long !== null) {
+            if (navigator.platform === 'iPhone') {
+                setRouteLink(`http://maps.apple.com/?saddr=${position.lat},${position.long}&daddr=Metodista%20Contagiante%20R.%20Francisco%20de%20Souza%20Beltr%C3%A3o%2C%20318%20-%20Balneario%20das%20Conchas%20S%C3%A3o%20Pedro%20da%20Aldeia%20-%20RJ%2028949-374@-22.8328057,-42.143218`);
+            } else {
                 setRouteLink(`https://www.google.com/maps/dir/?api=1&origin=${position.lat},${position.long}&destination=Metodista%20Contagiante%20R.%20Francisco%20de%20Souza%20Beltr%C3%A3o%2C%20318%20-%20Balneario%20das%20Conchas%20S%C3%A3o%20Pedro%20da%20Aldeia%20-%20RJ%2028949-374@-22.8328057,-42.143218&travelmode=driving`);
             }
+        }
+        if (position.lat === null || position.long === null) {
+            navigator.geolocation.getCurrentPosition((pos) => {
+                const lat = pos.coords.latitude;
+                const long = pos.coords.longitude;
+                setPosition({ lat, long });
+            }, () => { }, { enableHighAccuracy: true, maximumAge: 30000, timeout: 60000 });
         }
     }, [ position ])
 
