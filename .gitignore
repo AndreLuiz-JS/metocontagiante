@@ -10,6 +10,7 @@
 
 # production
 /build
+/auth
 
 # misc
 /services
