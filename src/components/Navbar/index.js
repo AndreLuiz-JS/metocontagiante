@@ -58,7 +58,6 @@ const NavBar = styled(animated.nav)`
   align-items:center;
   justify-content:space-between;
   width: 100%;
-  height:60px;
   padding: 10px 0;
   margin: 0 auto;
   border-radius: 0 0 12px 12px;
