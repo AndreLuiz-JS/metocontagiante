@@ -28,7 +28,7 @@ export default function Maps() {
 
     return (
         <Container>
-            <StyledLink href={routeLink} target="_blank">Clique aqui e acesse a rota</StyledLink>
+            <StyledLink href={routeLink} target="_blank">Clique aqui e acesse a rota<br />para a Igreja Metotista Contagiante</StyledLink>
             <StyledMap src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.180632423063!2d-42.14540668459345!3d-22.832805685049472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x970e10da4d7d13%3A0xfe9d6eb76ae3e508!2sMetodista%20Contagiante!5e0!3m2!1spt-BR!2sbr!4v1586128008887!5m2!1spt-BR!2sbr" />
         </Container>
     )

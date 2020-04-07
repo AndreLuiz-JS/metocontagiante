@@ -9,7 +9,7 @@ export default function Loading({ loading, message }) {
         <Load>
             <Spinner
                 name='cube-grid'
-                fadeIn='0.3s'
+                fadeIn='full'
                 color={dark.colors.effect}
             />
             <span className='message'>
