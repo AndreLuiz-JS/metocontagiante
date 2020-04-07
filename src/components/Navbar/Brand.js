@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Logo from '../../assets/Logo';
 
 const Brand = (props) => (
-    <LinkContainer to="/">
+    <LinkContainer to="/" centerMaxSize={props.centerMaxSize}>
         <Logo size={50} color='#fff' />
         <span>Metodista Contagiante</span>
     </LinkContainer>
@@ -29,9 +29,9 @@ const LinkContainer = styled(NavLink)`
         width:100vw;
         padding:0;
         margin:0;
-    }
-    img{
-
+        img {
+            display:none;
+        }
     }
     span{
         padding-left:10px;
