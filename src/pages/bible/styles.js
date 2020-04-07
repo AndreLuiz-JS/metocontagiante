@@ -6,7 +6,7 @@ import dark from '../../styles/themes/dark';
 export const Dropdown = styled.ul`
     position: sticky;
     z-index:2;
-    top:0;
+    top:60px;
     left:0;
     right:0;
     max-width:1280px;
