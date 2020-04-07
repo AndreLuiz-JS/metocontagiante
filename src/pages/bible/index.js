@@ -1,5 +1,6 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import Loading from '../../components/Loading';
 
 import api from '../../services/api';
 import ScrollTopButton from '../../components/ScrollTopButton';
@@ -19,9 +20,11 @@ export default function Bible() {
     const [ chapterState, setChapterState ] = useState({ selectedOption: null });
     const [ bookMark, setBookMark ] = useState(JSON.parse(localStorage.getItem("bookMark")) || { testament: '', bookName: '', chapter: 0 });
     const [ textToShow, setTextToShow ] = useState([]);
+    const [ loading, setLoading ] = useState({ status: false, message: '' });
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         async function fetchData() {
+            setLoading({ status: true, message: 'Carregando Capítulo' });
             const listOfBooks = await getListOfBooks();
             const listOfChapters = await getListOfChapters();
             const chapterContent = await getChapterContent();
@@ -38,17 +41,21 @@ export default function Bible() {
             localStorage.setItem(bookMark.testament, bookMark.bookName);
             localStorage.setItem(bookMark.bookName, bookMark.chapter);
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            setLoading({ status: false, message: 'Capítulo Carregado!' });
         }
+
         (bookMark.testament === "") ? setInitialState() : fetchData();
         //eslint-disable-next-line
     }, [ bookMark ]);
 
     async function setInitialState() {
+        setLoading({ status: true, message: 'Carregando a Bíblia' });
         const testament = listOfTestaments[ 0 ];
         const response = await api.get('/bible');
         const bookName = response.data.oldTestament[ 0 ];
         setBookMark({ testament, bookName, chapter: 1 });
         localStorage.setItem("bookMark", JSON.stringify({ testament, bookName, chapter: 1 }));
+        setLoading({ status: false, message: 'Bíblia Carregada' });
     }
 
     async function getListOfBooks() {
@@ -173,6 +180,7 @@ export default function Bible() {
     }
     return (
         <div>
+            <Loading loading={loading.status} message={loading.message} />
             <Dropdown>
                 <DropdownItem
                     placeholder="Testamento"

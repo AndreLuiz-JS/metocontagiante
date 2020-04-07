@@ -41,6 +41,7 @@ const CollapseWrapper = styled(animated.div)`
   top: 70px;
   left: 0;
   right: 0;
+  z-index:2;
     @media (min-width: ${props => props.displayMaxSize}px) {
       display:none;
     }

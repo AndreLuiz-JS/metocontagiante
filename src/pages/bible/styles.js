@@ -109,7 +109,7 @@ export const ButtonGroup = styled.nav`
     margin: 15px auto 0;
     justify-content: space-between;
     align-content:center;
-    z-index:1;
+    z-index:0;
     background: ${props => props.theme.backgroundSecondary};
     & :last-child{
         justify-self:end;

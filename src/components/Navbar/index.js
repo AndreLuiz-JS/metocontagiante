@@ -66,7 +66,7 @@ const NavBar = styled(animated.nav)`
   top: 0;
   left: 0;
   background: ${props => props.theme.colors.background};
-  z-index: 1;
+  z-index: 2;
   @media(max-width:${disableBurguerMenuScreenSize + 'px'}){
       width:100%;
       min-width:300px;
