@@ -1,7 +1,7 @@
 export default [
   { to: "/bible", name: "Bíblia" },
   { to: "/maps", name: "Como Chegar" },
-  { to: "/spotify", name: "Spotify" },
-  { to: "/social-network", name: "Redes Sociais" },
+  { to: "/podcast", name: "Podcast" },
+  { to: "/devocional", name: "Devocional" },
   { to: "/contact", name: "Contato" },
 ]

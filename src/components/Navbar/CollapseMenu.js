@@ -59,13 +59,16 @@ const NavLinks = styled.ul`
     transition: all 300ms linear 0s;
   }
   & a {
-    font-size: 1.9rem;
+    font-size: 1.7rem;
     line-height: 2;
     color: ${props => props.theme.colors.primary};
     text-transform: uppercase;
     text-decoration: none;
     transition: 0.3s;
     cursor: pointer;
+    @media(max-width:480px){
+      font-size:1.3rem;
+    }
 }
   & a:hover {
     color: ${props => props.theme.colors.effect};

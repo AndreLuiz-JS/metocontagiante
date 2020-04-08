@@ -35,10 +35,13 @@ const LinkContainer = styled(NavLink)`
     }
     span{
         padding-left:10px;
+        transition:0.3s;
         @media (max-width: ${props => props.centerMaxSize}px) {
             text-align:center;
         }
-        transition:0.3s;
+        @media(max-width:480px){
+            font-size:2rem;
+        }
     }
 
     &:hover {
