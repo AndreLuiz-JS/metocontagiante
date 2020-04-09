@@ -25,7 +25,7 @@ const Navbar = (props) => {
     <>
       <NavBar style={barAnimation}>
         <FlexContainer>
-          <Brand centerMaxSize={disableBurguerMenuScreenSize} />
+          <Brand centermaxsize={disableBurguerMenuScreenSize} />
           <NavLinks style={linkAnimation}>
             {links.map((link, index) => {
               return (

@@ -4,6 +4,7 @@ import Main from './pages/main';
 import Bible from './pages/bible';
 import Maps from './pages/maps';
 import Podcast from './pages/podcast';
+import Devotional from './pages/devotional';
 
 const Routes = () => (
     <Switch>
@@ -11,6 +12,7 @@ const Routes = () => (
         <Route path="/bible" component={Bible} />
         <Route path="/maps" component={Maps} />
         <Route path="/podcast" component={Podcast} />
+        <Route path="/devotional" component={Devotional} />
     </Switch>
 )
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import anchorFm from '../../services/anchorfm';
+import normalizeDate from '../../services/normalizeDate';
 import { Section, Dropdown, DropdownItem, EmbedPodcast, Podcast } from './styles';
 
 export default function Spotify() {
@@ -17,7 +18,7 @@ export default function Spotify() {
             console.log(image);
             const title = xmlItems[ i ].children[ 0 ].textContent;
             const description = xmlItems[ i ].children[ 1 ].textContent.replace(/<[^>]*>/g, '').replace(/&[^;]*;/g, '');
-            const date = getDate(xmlItems[ i ].children[ 5 ].textContent);
+            const date = normalizeDate(xmlItems[ i ].children[ 5 ].textContent);
             const link = xmlItems[ i ].children[ 2 ].textContent.replace('episodes', 'embed/episodes');
             podcastArray.push({ title, description, link, image, date })
 
@@ -69,43 +70,4 @@ export default function Spotify() {
         localStorage.setItem('podcast', JSON.stringify(selectedState.value))
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    function getDate(utcDate) {
-        const daysOfWeek = [ 'domingo',
-            'segunda-feira',
-            'terça-feira',
-            'quarta-feira',
-            'quinta-feira',
-            'sexta-feira',
-            'sábado' ];
-        const monthOfYear = [
-            'janeiro',
-            'fevereiro',
-            'março',
-            'abril',
-            'maio',
-            'junho',
-            'julho',
-            'agosto',
-            'setembro',
-            'outubro',
-            'novembro',
-            'dezembro',
-        ];
-        const date = new Date(utcDate);
-        const now = new Date();
-        const diff = Math.abs(now.getTime() - date.getTime());
-        const daysOfDiference = Math.ceil(diff / (1000 * 60 * 60 * 24));
-        console.log(daysOfDiference);
-        if (daysOfDiference < 1) return 'hoje';
-        if (daysOfDiference < 2) return 'ontem';
-        if (daysOfDiference < 3) return 'anteontem';
-        const weekDay = daysOfWeek[ date.getDay() ];
-        const day = date.getDate();
-        const month = monthOfYear[ date.getMonth() ];
-        const year = date.getFullYear();
-        return `${weekDay}, ${day} de ${month} de ${year}`;
-
-    }
-
 }
