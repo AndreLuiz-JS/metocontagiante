@@ -1,5 +1,5 @@
 export default {
-    title: 'dark',
+    title: 'default',
 
     colors: {
         primary: '#e7ecef',
