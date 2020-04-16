@@ -2,7 +2,7 @@ import React from 'react';
 import Spinner from 'react-spinkit';
 import { Load } from './styles';
 
-import dark from '../../styles/themes/dark';
+import theme from '../../styles/themes/default';
 
 export default function Loading({ loading, message }) {
     return loading ? (
@@ -10,7 +10,7 @@ export default function Loading({ loading, message }) {
             <Spinner
                 name='cube-grid'
                 fadeIn='full'
-                color={dark.colors.effect}
+                color={theme.colors.effect}
             />
             <span className='message'>
                 {message}

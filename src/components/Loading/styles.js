@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Load = styled.div`
     position:fixed;
     display:flex;
-    z-index:1;
+    z-index:3;
     justify-content:center;
     align-items:center;
     width:100vw;
