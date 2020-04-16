@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
-import dark from './styles/themes/dark';
+import theme from './styles/themes/default';
 import GlobalStyle from './styles/Global';
 import Navbar from './components/Navbar';
 
@@ -15,7 +15,7 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={dark}>
+    <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Navbar
           navbarState={navbarState}
