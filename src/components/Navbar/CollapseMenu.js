@@ -17,7 +17,7 @@ const CollapseMenu = (props) => {
         }).interpolate(openValue => `translate3d(0, ${openValue}px, 0`),
       }
       }
-        displayMaxSize={props.displayMaxSize}
+        displaymaxsize={props.displayMaxSize}
       >
         <NavLinks>
           {links.map((link, index) => {
@@ -42,7 +42,7 @@ const CollapseWrapper = styled(animated.div)`
   left: 0;
   right: 0;
   z-index:2;
-    @media (min-width: ${props => props.displayMaxSize}px) {
+    @media (min-width: ${props => props.displaymaxsize}px) {
       display:none;
     }
 `;
