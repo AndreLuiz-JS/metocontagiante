@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
-import dark from '../../styles/themes/dark';
+import theme from '../../styles/themes/default';
 
 export const Dropdown = styled.ul`
     position: sticky;
@@ -21,7 +21,7 @@ export const Dropdown = styled.ul`
 const customDropDownStyle = {
     input: (provided) => ({
         ...provided,
-        color: dark.colors.text,
+        color: theme.colors.text,
     }),
     dropdownIndicator: (provided) => ({
         ...provided,
@@ -30,8 +30,8 @@ const customDropDownStyle = {
     }),
     option: (provided, state) => ({
         ...provided,
-        color: state.isFocused ? dark.colors.background : dark.colors.secondary,
-        backgroundColor: state.isFocused ? (dark.colors.effect) : (dark.colors.backgroundSecondary),
+        color: state.isFocused ? theme.colors.background : theme.colors.secondary,
+        backgroundColor: state.isFocused ? (theme.colors.effect) : (theme.colors.backgroundSecondary),
         padding: "5px",
         transition: "0.15s"
 
@@ -41,8 +41,8 @@ const customDropDownStyle = {
         width: '100%',
         fontSize: "1.4rem",
         borderBottom: 'none',
-        color: state.isFocused ? (dark.colors.primary) : (dark.colors.background),
-        backgroundColor: dark.colors.backgroundSecondary,
+        color: state.isFocused ? (theme.colors.primary) : (theme.colors.background),
+        backgroundColor: theme.colors.backgroundSecondary,
         marginTop: 0,
         paddingLeft: 10,
         paddingRight: 10,

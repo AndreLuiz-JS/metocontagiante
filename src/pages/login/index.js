@@ -63,7 +63,7 @@ export default function Login() {
 
     if (redirect) return (<Redirect to="/admin" />);
     return (
-        <Form method="POSt">
+        <Form method="POST">
             <Loading loading={loading.status} message={loading.message} />
             <label htmlFor="email">E-mail:</label>
             <input type="email" name="email" id="email" value={email} onChange={handleChangeEmail} />
