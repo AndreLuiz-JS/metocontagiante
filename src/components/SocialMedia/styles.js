@@ -2,18 +2,18 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     position:sticky;
-    bottom:10px;
     display: flex;
+    bottom:20px;
     justify-content:space-between;
     align-items:center;
-    width:110px;
-    margin:10px auto;
+    width:180px;
+    margin:-50px auto 0;
     a {
         border-radius:10px;
         padding:5px;
         transition:0.3s;
         color:#fff;
-        
+        margin:0 5px;
         :nth-child(1) {
             background:#3b5998;
         }
