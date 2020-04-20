@@ -5,6 +5,7 @@ import Bible from './pages/bible';
 import Maps from './pages/maps';
 import Podcast from './pages/podcast';
 import Devotional from './pages/devotional';
+import Contact from './pages/contact';
 import Login from './pages/login';
 import Admin from './pages/admin';
 
@@ -15,6 +16,7 @@ const Routes = () => (
         <Route path="/maps" component={Maps} />
         <Route path="/podcast" component={Podcast} />
         <Route path="/devotional" component={Devotional} />
+        <Route path="/contact" component={Contact} />
         <Route path="/login" component={Login} />
 
         <Route path="/admin" component={Admin} />
