@@ -4,4 +4,5 @@ export default [
   { to: "/podcast", name: "Podcast" },
   { to: "/devotional", name: "Devocional" },
   { to: "/contact", name: "Contato" },
+  { to: "/admin", name: "adm" },
 ]
