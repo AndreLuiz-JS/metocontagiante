@@ -11,7 +11,7 @@ export default function Postbutton(props) {
 const Styledbutton = styled.button`
     position:fixed;
     display:flex;
-    align-self:end;
+    align-self:flex-end;
     margin:0 0 0 auto;
     width:50px;
     height:50px;
