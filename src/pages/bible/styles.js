@@ -99,8 +99,8 @@ export const Section = styled.section`
     }
 `
 export const ButtonGroup = styled.nav`
-    position: sticky;
-    bottom:1vh;
+    position: fixed;
+    bottom:10px;
     left:0;
     right:0;
     display:flex;

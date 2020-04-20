@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    position:sticky;
+    position:fixed;
     display: flex;
     bottom:20px;
+    left:0;
+    right:0;
     justify-content:space-between;
     align-items:center;
     width:180px;
-    margin:-50px auto 0;
+    margin:0 auto;
+    pointer-events: none;
+    
     a {
         border-radius:10px;
         padding:5px;
