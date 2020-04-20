@@ -1,17 +1,18 @@
+import React from 'react';
 import { IoIosAddCircle } from 'react-icons/io';
 import styled from 'styled-components';
 
-export default function Postbutton() {
+export default function Postbutton(props) {
     return (
-        <Styledbutton><IoIosAddCircle size={30} /></Styledbutton>
+        <Styledbutton onClick={props.onClick}><IoIosAddCircle size={50} /></Styledbutton>
     )
 }
 
 const Styledbutton = styled.button`
     position:fixed;
     display:flex;
-    justify-content:right;
-    margin:0 0 0 -40px;
+    align-self:end;
+    margin:0 0 0 auto;
     width:50px;
     height:50px;
     top:80px;

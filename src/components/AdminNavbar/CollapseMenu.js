@@ -7,7 +7,7 @@ import { UserContext } from '../../pages/admin';
 import links from './links';
 
 const CollapseMenu = (props) => {
-  const { userAccess } = useContext(UserContext);
+  const { userAccess, userInfo } = useContext(UserContext);
   const { open } = useSpring({ open: props.navbarState ? 0 : 1 });
   if (props.navbarState === true) {
     return (
@@ -21,18 +21,24 @@ const CollapseMenu = (props) => {
 
       >
         <NavLinks>
+          <li key={links.length}><p>{userInfo.name} <button onClick={logout}>(sair)</button></p></li>
           {links.map((link, index) => {
             if (userAccess.includes(link.user_access))
               return (
                 <li key={index} onClick={props.handleNavbar}><NavLink to={link.to}>{link.name}</NavLink></li>
               )
-            return (<></>)
+            return (null)
           })}
         </NavLinks>
       </CollapseWrapper>
     );
   }
   return null;
+  function logout() {
+    localStorage.removeItem('ACCESS_TOKEN');
+
+    window.location.replace('/login');
+  }
 };
 
 export default CollapseMenu;
@@ -59,6 +65,23 @@ const NavLinks = styled.ul`
   justify-items:center;
   & li {
     transition: all 300ms linear 0s;
+    p{
+      color:${props => props.theme.colors.secondary};
+      text-transform:capitalize;
+      padding:10px 0;
+      font-size:1.3rem;
+        button {
+          font-size:1.3rem;
+          text-transform:lowercase;
+          background:none;
+          border:none;
+          color:${props => props.theme.colors.secondary};
+          transition:0.3s;
+          :hover{
+            color:${props => props.theme.colors.effect};
+            font-size:1.6rem;
+          }
+        }
   }
   & a {
     font-size: 1.3rem;
@@ -68,6 +91,7 @@ const NavLinks = styled.ul`
     text-decoration: none;
     transition: 0.3s;
     cursor: pointer;
+  
     @media(max-width:480px){
       font-size:1.3rem;
     }

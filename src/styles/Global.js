@@ -22,6 +22,17 @@ const GlobalStyles = createGlobalStyle`
     margin-bottom: 50px;
     overflow-x:hidden;
   }
+  .calendar {
+    position:absolute;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+  }
+  .dateTimePicker {
+    background:silver;
+    color:#000;
+  }
 `;
 
 export default GlobalStyles;

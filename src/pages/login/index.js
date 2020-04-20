@@ -24,9 +24,9 @@ export default function Login() {
                 localStorage.setItem('ACCESS_TOKEN', token);
                 setRedirect(true);
             } catch (err) {
+                console.log(err.response.data);
                 setLoading({ status: false, message: '' });
                 setStatusMessage('Autenticação falhou. Tente novamente.');
-                console.log(err);
             }
     }
     function validateEmail() {

@@ -1,4 +1,4 @@
-export default function normalizeDate(utcDate) {
+export default function normalizeDate(utcDate = new Date().toISOString()) {
     const daysOfWeek = [ 'domingo',
         'segunda-feira',
         'terça-feira',
@@ -22,14 +22,24 @@ export default function normalizeDate(utcDate) {
     ];
     const date = new Date(utcDate);
     const now = new Date();
-    const diff = Math.abs(now.getTime() - date.getTime());
-    const daysOfDiference = diff / (1000 * 60 * 60 * 24);
-    if (daysOfDiference < 1) return 'hoje';
-    if (daysOfDiference < 2) return 'ontem';
-    if (daysOfDiference < 3) return 'anteontem';
+    const dateYearMonth = date.toISOString().substr(0, 7);
+    const nowYearMonth = now.toISOString().substr(0, 7);
+    const hour = addZero(date.getHours());
+    const minutes = addZero(date.getMinutes());
+    if (dateYearMonth === nowYearMonth) {
+        if (date.getDate() === now.getDate()) return `hoje às ${hour}:${minutes}`;
+        if (now.getDate() - date.getDate() === 1) return `ontem às ${hour}:${minutes}`;
+    }
     const weekDay = daysOfWeek[ date.getDay() ];
     const day = date.getDate();
     const month = monthOfYear[ date.getMonth() ];
     const year = date.getFullYear();
-    return `${weekDay}, ${day} de ${month} de ${year}`;
+    return `${weekDay}, ${day} de ${month} de ${year} às ${hour}:${minutes}`;
+
+    function addZero(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
 }

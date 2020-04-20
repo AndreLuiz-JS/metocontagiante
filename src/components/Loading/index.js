@@ -4,12 +4,12 @@ import { Load } from './styles';
 
 import theme from '../../styles/themes/default';
 
-export default function Loading({ loading, message }) {
+export default function Loading({ loading, message, ico = 'cube-grid' }) {
     return loading ? (
         <Load>
             <Spinner
-                name='cube-grid'
-                fadeIn='full'
+                name={ico}
+                fadeIn='none'
                 color={theme.colors.effect}
             />
             <span className='message'>
