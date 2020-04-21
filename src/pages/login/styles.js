@@ -15,7 +15,31 @@ export const Form = styled.form`
     background-color:${props => props.theme.colors.backgroundSecondary};
     & div {
         grid-column: 1 / span 2;
-        justify-self: center;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        margin:0 auto;
+        & span {
+            padding:20px;
+            font-size:1.3rem;
+            & a {
+                color: ${props => props.theme.colors.primary};
+                text-transform: lowercase;
+                font-weight: 600;
+                border-bottom: 1px solid transparent;
+                margin: 0 1.5rem;
+                transition: all 300ms linear 0s;
+                text-decoration: none;
+                cursor: pointer;
+
+                &:hover {
+                    color: ${props => props.theme.colors.effect};
+                    border-bottom: 1px solid ${props => props.theme.colors.effect};
+                }
+
+            }
+        }
     }
     & input {
         border-radius:3px;

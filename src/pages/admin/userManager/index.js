@@ -36,10 +36,8 @@ export default function ManageUsers() {
         }
     }
 
-    useEffect(() => {
-        fetchData();
 
-    }, []);
+    fetchData();
 
     useEffect(() => {
         document.getElementById('pwd').focus();

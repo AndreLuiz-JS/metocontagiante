@@ -7,6 +7,7 @@ import Podcast from './pages/podcast';
 import Devotional from './pages/devotional';
 import Contact from './pages/contact';
 import Login from './pages/login';
+import SignUp from './pages/login/signUp';
 import Admin from './pages/admin';
 
 const Routes = () => (
@@ -18,6 +19,7 @@ const Routes = () => (
         <Route path="/devotional" component={Devotional} />
         <Route path="/contact" component={Contact} />
         <Route path="/login" component={Login} />
+        <Route path="/signup" component={SignUp} />
 
         <Route path="/admin" component={Admin} />
     </Switch>

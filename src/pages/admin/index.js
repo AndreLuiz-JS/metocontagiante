@@ -25,31 +25,34 @@ export default function Admin() {
     const [ loading, setLoading ] = useState({ status: true, message: 'Verificando dados.' });
 
     async function authenticate() {
-        setLoading({ status: true, message: 'Verificando dados.' });
         const localToken = localStorage.getItem('ACCESS_TOKEN');
         if (!localToken) {
-            setIsAuthenticated(false);
             setRedirect(true);
-        }
-        try {
-            const response = await api.get('/auth', { headers: { Authorization: `Bearer ${localToken}` } });
-            const { user_types, user_info } = response.data;
-            setUserInfo({ ...user_info, token: localToken });
-            setUserAccess(user_types);
-            setLoading({ status: false, message: '' });
-            setIsAuthenticated(true);
-        } catch (err) {
-            console.log(err.response);
-            localStorage.removeItem('ACCESS_TOKEN');
-            setIsAuthenticated(false);
-            setRedirect(true);
+        } else {
+            setLoading({ status: true, message: 'Verificando dados.' })
+            try {
+                const response = await api.get('/auth', { headers: { Authorization: `Bearer ${localToken}` } });
+                const { user_types, user_info } = response.data;
+                setUserInfo({ ...user_info, token: localToken });
+                setUserAccess(user_types);
+                setLoading({ status: false, message: '' });
+                setIsAuthenticated(true);
+            } catch (err) {
+                console.log(err.response);
+                localStorage.removeItem('ACCESS_TOKEN');
+                setIsAuthenticated(false);
+                setRedirect(true);
+            }
         }
     }
 
     useEffect(() => {
         authenticate();
-    }, [])
+    }, []);
 
+    if (redirect) return (
+        <Redirect to="/login" />
+    )
     if (isAuthenticated) return (
         <Container>
             <UserContext.Provider value={{ userAccess, userInfo }}>
@@ -64,11 +67,6 @@ export default function Admin() {
                 </Switch>
             </UserContext.Provider>
         </Container >
-    )
-    if (redirect) return (
-        <Redirect to={{
-            pathname: "/login"
-        }} />
     )
     return (
         <>

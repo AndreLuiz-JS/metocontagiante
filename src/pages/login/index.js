@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, Redirect } from 'react-router-dom';
 import Loading from '../../components/Loading';
 
 import { Form } from './styles';
@@ -11,7 +11,13 @@ export default function Login() {
     const [ password, setPassword ] = useState('');
     const [ statusMessage, setStatusMessage ] = useState('');
     const [ loading, setLoading ] = useState({ status: false, message: '' });
-    const [ redirect, setRedirect ] = useState(false);
+    const [ redirectToAdmin, setRedirectToAdmin ] = useState(false);
+
+    useEffect(() => {
+        const localToken = localStorage.getItem('ACCESS_TOKEN');
+        if (localToken) setRedirectToAdmin(true);
+    }, []);
+
     async function handleSubmit(e) {
         e.preventDefault();
         setStatusMessage('');
@@ -22,7 +28,7 @@ export default function Login() {
                 setLoading({ status: false, message: '' });
                 const { token } = response.data;
                 localStorage.setItem('ACCESS_TOKEN', token);
-                setRedirect(true);
+                setRedirectToAdmin(true);
             } catch (err) {
                 console.log(err.response.data);
                 setLoading({ status: false, message: '' });
@@ -61,8 +67,8 @@ export default function Login() {
         setPassword(e.target.value);
     }
 
-    if (redirect) return (<Redirect to="/admin" />);
-    return (
+    if (redirectToAdmin) return (<Redirect to="/admin" />)
+    else return (
         <Form method="POST">
             <Loading loading={loading.status} message={loading.message} />
             <label htmlFor="email">E-mail:</label>
@@ -71,6 +77,7 @@ export default function Login() {
             <input type="password" name="password" id="password" value={password} onChange={handleChangePassword} />
             <div>
                 <button onClick={handleSubmit}>Login</button>
+                <span>Ainda não tem cadastro? <NavLink to='/signup'>Cadastre-se</NavLink></span>
             </div>
             <div><p>{statusMessage}</p></div>
         </Form>

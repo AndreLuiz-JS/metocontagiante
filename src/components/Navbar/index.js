@@ -112,8 +112,7 @@ const NavLinks = styled(animated.ul)`
 
     &:hover {
       color: ${props => props.theme.colors.effect};
-      text-transform:uppercase;
-      text-decoration: none;
+      border-bottom: 1px solid ${props => props.theme.colors.effect};
     }
   }
 `;
