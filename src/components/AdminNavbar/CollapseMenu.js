@@ -37,7 +37,7 @@ const CollapseMenu = (props) => {
   function logout() {
     localStorage.removeItem('ACCESS_TOKEN');
 
-    window.location.replace('/login');
+    window.location.replace('/');
   }
 };
 

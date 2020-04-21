@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 
 import { UserContext } from '../';
 import PasswordDialog from './passwordDialog';
+import Loading from '../../../components/Loading';
+
 
 import { Section, Header, Form } from './styles';
 
@@ -15,9 +17,11 @@ export default function Home(props) {
     const [ disabledEmailButton, setDisabledEmailButton ] = useState(true);
     const [ disabledNameButton, setDisabledNameButton ] = useState(true);
     const [ disabledPasswordButton, setDisabledPasswordButton ] = useState(true);
+    const [ loading, setLoading ] = useState({ status: false, message: '' });
 
     return (
         <Section>
+            <Loading loading={loading.status} message={loading.message} />
             <Header>
                 <p>{userInfo.name}: {userInfo.email}</p>
                 <p>({userInfo.user_type})</p>
@@ -30,18 +34,18 @@ export default function Home(props) {
                     onChange={handleChangeName}
                     onFocus={handleChangeName}
                 />
-                <PasswordDialog name={newName} disabled={disabledNameButton} reference={'name'} />
+                <PasswordDialog setloading={setLoading} name={newName} disabled={disabledNameButton} reference={'name'} />
 
                 <label htmlFor="newEmail">novo E-mail:</label>
                 <input type="email" name="newEmail" id="newEmail" value={newEmail} onChange={handleChangeEmail} onFocus={handleChangeEmail} />
-                <PasswordDialog email={newEmail} disabled={disabledEmailButton} reference='email' />
+                <PasswordDialog setloading={setLoading} email={newEmail} disabled={disabledEmailButton} reference='email' />
                 <div><h2>Troca de senha</h2></div>
                 <label htmlFor="newPassword">nova senha:</label>
                 <input type="password" name="newPassword" id="newPassword" value={newPassword} onChange={handleChangePassword} onFocus={handleChangePassword} />
                 <span></span>
                 <label htmlFor="newPasswordConfirm">confirme nova senha:</label>
                 <input type="password" name="newPasswordConfirm" id="newPasswordConfirm" value={newPasswordConfirm} onChange={handleChangePasswordConfirm} onFocus={handleChangePasswordConfirm} />
-                <PasswordDialog newPassword={newPassword} disabled={disabledPasswordButton} reference='pass' />
+                <PasswordDialog setloading={setLoading} newPassword={newPassword} disabled={disabledPasswordButton} reference='pass' />
 
                 <div><p id="statusMessage">{statusMessage}</p></div>
             </Form>
