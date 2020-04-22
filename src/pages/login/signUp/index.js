@@ -7,6 +7,8 @@ import Loading from '../../../components/Loading';
 
 import { Section, Form } from './styles';
 
+require('dotenv/config');
+
 export default function Home(props) {
     const [ name, setName ] = useState('');
     const [ email, setEmail ] = useState('');
@@ -15,15 +17,30 @@ export default function Home(props) {
     const [ statusMessage, setStatusMessage ] = useState('');
     const [ loading, setLoading ] = useState({ status: false, message: '' });
     const [ redirect, setRedirect ] = useState({ status: false, page: '' });
+    const googleCaptchaKey = '6LciV-wUAAAAACNecfbl1yg64ogCQyBNMSlo6KS_';
 
     if (redirect.status) return (<Redirect to={redirect.page} />);
+
+    const callback = document.createElement('script');
+    callback.type = 'text/javascript';
+    callback.innerHTML = `function recaptchaCallback(res) {
+        sessionStorage.setItem('captchaKey', res);
+    }`
+    document.body.appendChild(callback);
+
+    const captcha = document.createElement('script');
+    captcha.src = 'https://www.google.com/recaptcha/api.js';
+    captcha.async = true;
+    captcha.defer = true;
+    document.head.appendChild(captcha);
+
 
     return (
         <Section>
             <Loading loading={loading.status} message={loading.message} />
             <h1>Seja bem-vindo!</h1>
             <h2>Informe seus dados para realizar o cadastro</h2>
-            <Form method="POST">
+            <Form method="POST" id="userSignup">
 
                 <label htmlFor="name">Nome:</label>
                 <input type="name" name="name" id="name" value={name}
@@ -45,6 +62,7 @@ export default function Home(props) {
                     <button onClick={submitData}>Cadastrar</button>
                 </div>
                 <div><p id="statusMessage">{statusMessage}</p></div>
+                <div id="g-recaptcha" className="g-recaptcha" data-theme="dark" data-callback="recaptchaCallback" data-sitekey={googleCaptchaKey}></div>
             </Form>
         </Section>
     );
@@ -58,11 +76,22 @@ export default function Home(props) {
     }
     async function submitData(e) {
         e.preventDefault();
+        const captcha = sessionStorage.getItem('captchaKey');
+        if (!captcha) {
+            setStatusMessage('Resolva o reCAPTCHA ⇩');
+            blinkStatusElement();
+            return
+        }
         if (verifyData()) {
-
+            const grecaptcha = document.getElementById('g-recaptcha');
+            const form = grecaptcha.parentNode;
+            form.removeChild(grecaptcha);
+            form.appendChild(grecaptcha);
+            sessionStorage.removeItem('captchaKey');
             try {
                 setLoading({ status: true, message: 'Enviando dados.' });
-                const response = await api.post('/user', { name, email, password });
+                const response = await api.post('/user', { name, email, password, captcha });
+
                 if (response) {
                     const { token } = response.data;
                     localStorage.setItem('ACCESS_TOKEN', token);
@@ -71,10 +100,15 @@ export default function Home(props) {
 
                 }
             } catch (err) {
-                if (err.response) console.log(err.response.data)
+                if (err.response) {
+                    if (err.response.data.error.search('Captcha') !== -1) setStatusMessage('Resolva novamente o reCAPTCHA');
+                    if (err.response.data.error.search('Email') !== -1) {
+                        setEmail('');
+                        setStatusMessage('Email já cadastrado');
+                    }
+                    console.log(err.response.data);
+                }
                 else console.log(err);
-                setEmail('');
-                setStatusMessage('Email já cadastrado.')
                 setLoading({ status: false })
 
             }
@@ -168,7 +202,7 @@ export default function Home(props) {
         let direction = 'up';
         let repeat = 3;
         function setFilter() {
-            statusElement.style.filter = `hue-rotate(${value * 30}deg) drop-shadow(0 0 ${value}rem #990000) brightness(${value + 1})`;
+            statusElement.style.filter = `hue-rotate(${value * 30}deg) drop-shadow(0 0 ${value * 2}rem #ff0000) brightness(${value + 1})`;
             if (direction === 'up') {
                 value += 0.1;
             }

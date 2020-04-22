@@ -27,6 +27,11 @@ export const Section = styled.section`
     & p {
         color:${props => props.theme.colors.text};
     }
+    & div {
+        display:flex;
+        margin:0 auto;
+        align-self:center;
+    }
     
 `
 
