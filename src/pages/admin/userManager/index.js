@@ -36,8 +36,10 @@ export default function ManageUsers() {
         }
     }
 
-
-    fetchData();
+    useEffect(() => {
+        fetchData();
+        // eslint-disable-next-line
+    }, []);
 
     useEffect(() => {
         document.getElementById('pwd').focus();
