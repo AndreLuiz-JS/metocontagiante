@@ -11,6 +11,8 @@ import User from './user';
 import UserManager from './userManager';
 import Devotional from './devotional';
 import AddDevotional from './devotional/new';
+import Cell from './cell';
+import AddCell from './cell/new';
 
 import api from '../../services/api';
 
@@ -64,6 +66,8 @@ export default function Admin() {
                     <Route exact path="/admin/user-manager" component={UserManager} />
                     <Route exact path="/admin/devotional" component={Devotional} />
                     <Route exact path="/admin/devotional/new" component={AddDevotional} />
+                    <Route exact path="/admin/cell" component={Cell} />
+                    <Route exact path="/admin/cell/new" component={AddCell} />
                 </Switch>
             </UserContext.Provider>
         </Container >
