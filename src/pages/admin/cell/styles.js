@@ -42,7 +42,8 @@ export const Form = styled.div`
   margin: 0 auto;
   padding-top: 20px;
   width: 100%;
-  input {
+  input,
+  select {
     font-size: 2rem;
     width: 100%;
     text-align: left;

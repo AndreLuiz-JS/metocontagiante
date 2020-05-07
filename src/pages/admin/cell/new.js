@@ -15,7 +15,7 @@ export default function Devotional() {
     leader: "",
     phone: "",
     location: "",
-    weekday: "",
+    weekday: 4,
     hour: "",
     type: "",
   });
@@ -55,11 +55,19 @@ export default function Devotional() {
             onChange={handleChangeLeader}
           />
           <p>Dia</p>
-          <input
-            type="text"
+          <select
+            id="weekday"
             value={cellState.weekday}
             onChange={handleChangeWeekday}
-          />
+          >
+            <option value={0}>domingo</option>
+            <option value={1}>segunda-feira</option>
+            <option value={2}>terça-feira</option>
+            <option value={3}>quarta-feira</option>
+            <option value={4}>quinta-feira</option>
+            <option value={5}>sexta-feira</option>
+            <option value={6}>sábado</option>
+          </select>
 
           <p>Hora</p>
           <input
@@ -79,6 +87,14 @@ export default function Devotional() {
             value={cellState.phone}
             onChange={handleChangePhone}
           />
+          <p>Tipo</p>
+          <select id="type" value={cellState.type} onChange={handleChangeType}>
+            <option value="mista">mista</option>
+            <option value="casais">casais</option>
+            <option value="crianças">crianças</option>
+            <option value="homens">homens</option>
+            <option value="mulheres">mulheres</option>
+          </select>
           <input
             id="image"
             type="file"
@@ -132,6 +148,9 @@ export default function Devotional() {
   }
   function handleChangePhone(e) {
     setCellState({ ...cellState, phone: e.target.value });
+  }
+  function handleChangeType(e) {
+    setCellState({ ...cellState, type: e.target.value });
   }
   async function handleChangeImage(e) {
     const file = getImage(e.target.files);
