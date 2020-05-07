@@ -17,8 +17,8 @@ import {
 } from "./styles";
 
 export default function Devotional() {
-  const [dropdownSelectedIndex, setDropdownSelectedIndex] = useState(0);
-  const [cellState, setCellState] = useState({
+  const [ dropdownSelectedIndex, setDropdownSelectedIndex ] = useState(0);
+  const [ cellState, setCellState ] = useState({
     id: "",
     image: "",
     name: "",
@@ -29,12 +29,12 @@ export default function Devotional() {
     hour: "",
     type: "",
   });
-  const [dropDownCellArray, setDropDownCellArray] = useState([
+  const [ dropDownCellArray, setDropDownCellArray ] = useState([
     { value: "", label: "" },
   ]);
-  const [loading, setLoading] = useState({ status: false, message: "" });
+  const [ loading, setLoading ] = useState({ status: false, message: "" });
   const { userAccess, userInfo } = useContext(UserContext);
-  const [redirect, setRedirect] = useState({ status: false, page: "/login" });
+  const [ redirect, setRedirect ] = useState({ status: false, page: "/login" });
 
   async function fetchData() {
     if (!userAccess.includes("administrator_user")) {
@@ -54,7 +54,7 @@ export default function Devotional() {
       );
       setLoading({ ...loading, status: false });
       setDropDownCellArray(cellArray);
-      setCellState(cellArray[dropdownSelectedIndex].value);
+      setCellState(cellArray[ dropdownSelectedIndex ].value);
     } catch (err) {
       if (err.response) {
         console.log(err.response.data);
@@ -145,15 +145,15 @@ export default function Devotional() {
           <p>Tipo</p>
           <select id="type" value={cellState.type} onChange={handleChangeType}>
             <option value="mista">mista</option>
-            <option value="casais">casais</option>
-            <option value="crianças">crianças</option>
-            <option value="homens">homens</option>
-            <option value="mulheres">mulheres</option>
+            <option value="de casais">casais</option>
+            <option value="de crianças">crianças</option>
+            <option value="de homens">homens</option>
+            <option value="de mulheres">mulheres</option>
           </select>
           <input
             id="image"
             type="file"
-            accept="image/*"
+            accept="image/png,image/jpeg"
             onChange={handleChangeImage}
           />
           <img src={cellState.image} alt="" />
@@ -195,9 +195,9 @@ export default function Devotional() {
         }
         setDropDownCellArray(newDropdownItens);
         setLoading({ status: true, message: "Apagado!", ico: "pulse" });
-        if (newDropdownItens[dropdownSelectedIndex])
-          handleChangeCell(newDropdownItens[dropdownSelectedIndex]);
-        else handleChangeCell(newDropdownItens[dropdownSelectedIndex - 1]);
+        if (newDropdownItens[ dropdownSelectedIndex ])
+          handleChangeCell(newDropdownItens[ dropdownSelectedIndex ]);
+        else handleChangeCell(newDropdownItens[ dropdownSelectedIndex - 1 ]);
         setTimeout(function () {
           setLoading({ ...loading, status: false });
         }, 2000);
@@ -279,10 +279,10 @@ export default function Devotional() {
       if (inputFiles.length !== 0) {
         for (let i = 0; i < inputFiles.length; i++) {
           if (
-            inputFiles[i].type === "image/jpeg" ||
-            inputFiles[i].type === "image/png"
+            inputFiles[ i ].type === "image/jpeg" ||
+            inputFiles[ i ].type === "image/png"
           )
-            return inputFiles[i];
+            return inputFiles[ i ];
         }
       }
     }

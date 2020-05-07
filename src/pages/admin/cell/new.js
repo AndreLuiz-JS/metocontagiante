@@ -9,24 +9,24 @@ import api from "../../../services/api";
 import { Section, Form, Content, Footer } from "./styles";
 
 export default function Devotional() {
-  const [cellState, setCellState] = useState({
+  const [ cellState, setCellState ] = useState({
     image: "",
     name: "",
     leader: "",
-    phone: "",
+    phone: "(22) 9 9999-9999",
     location: "",
     weekday: 4,
-    hour: "",
-    type: "",
+    hour: "20h",
+    type: "mista",
   });
-  const [loading, setLoading] = useState({ status: false, message: "" });
+  const [ loading, setLoading ] = useState({ status: false, message: "" });
   const { userAccess, userInfo } = useContext(UserContext);
-  const [redirect, setRedirect] = useState({ status: false, page: "/login" });
+  const [ redirect, setRedirect ] = useState({ status: false, page: "/login" });
 
   useEffect(() => {
     if (!userAccess.includes("administrator_user"))
       setRedirect({ status: true, page: "/admin" });
-  }, [userAccess]);
+  }, [ userAccess ]);
 
   if (redirect.status) return <Redirect to={redirect.page} />;
 
@@ -90,10 +90,10 @@ export default function Devotional() {
           <p>Tipo</p>
           <select id="type" value={cellState.type} onChange={handleChangeType}>
             <option value="mista">mista</option>
-            <option value="casais">casais</option>
-            <option value="crianças">crianças</option>
-            <option value="homens">homens</option>
-            <option value="mulheres">mulheres</option>
+            <option value="de casais">casais</option>
+            <option value="de crianças">crianças</option>
+            <option value="de homens">homens</option>
+            <option value="de mulheres">mulheres</option>
           </select>
           <input
             id="image"
@@ -169,10 +169,10 @@ export default function Devotional() {
       if (inputFiles.length !== 0) {
         for (let i = 0; i < inputFiles.length; i++) {
           if (
-            inputFiles[i].type === "image/jpeg" ||
-            inputFiles[i].type === "image/png"
+            inputFiles[ i ].type === "image/jpeg" ||
+            inputFiles[ i ].type === "image/png"
           )
-            return inputFiles[i];
+            return inputFiles[ i ];
         }
       }
     }
