@@ -13,6 +13,7 @@ import Devotional from './devotional';
 import AddDevotional from './devotional/new';
 import Cell from './cell';
 import AddCell from './cell/new';
+import Advert from './advert';
 
 import api from '../../services/api';
 
@@ -68,6 +69,7 @@ export default function Admin() {
                     <Route exact path="/admin/devotional/new" component={AddDevotional} />
                     <Route exact path="/admin/cell" component={Cell} />
                     <Route exact path="/admin/cell/new" component={AddCell} />
+                    <Route exact path="/admin/advert" component={Advert} />
                 </Switch>
             </UserContext.Provider>
         </Container >
