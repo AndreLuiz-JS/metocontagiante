@@ -161,10 +161,6 @@ export default function Devotional() {
                         </li>
                     ))}
                 </ul>
-                <input
-                    type="text"
-                    value={devotionalState.verses}
-                />
                 <p>Conteúdo:</p>
                 <textarea
                     value={devotionalState.content}
