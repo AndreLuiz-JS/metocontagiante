@@ -19,12 +19,20 @@ export default function Devotional() {
     const [ loading, setLoading ] = useState({ status: false, message: '' });
     const { userAccess, userInfo } = useContext(UserContext);
     const [ redirect, setRedirect ] = useState({ status: false, page: '/login' });
+    const [ bookList, setBookList ] = useState([]);
+    const [ chapterList, setChapterList ] = useState([]);
+    const [ verseInList, setVerseInList ] = useState([]);
+    const [ verseOutList, setVerseOutList ] = useState([]);
+    const [ bookMark, setBookMark ] = useState({ book: 'Gênesis', chapter: '1', verseIn: '1', verseOut: '1' });
+    const [ versesList, setVersesList ] = useState([]);
 
     async function fetchData() {
         if (!userAccess.includes('post_user')) {
             setRedirect({ status: true, page: '/admin' });
             return
         }
+        const { oldTestament, newTestament } = (await api.get('bible')).data;
+        setBookList([ ...oldTestament, ...newTestament ]);
         try {
             setLoading({ status: true, message: 'Carregando devocionais disponíveis.' })
             const response = await api.get('devotional/all', {
@@ -38,6 +46,7 @@ export default function Devotional() {
             setDropDownDevotionalArray(devotionalArray);
             setDevotionalState(devotionalArray[ dropdownSelectedIndex ].value);
             setAvailable_at(new Date(devotionalArray[ dropdownSelectedIndex ].value.available_at));
+            if (devotionalArray[ dropdownSelectedIndex ].value.verses) setVersesList(devotionalArray[ dropdownSelectedIndex ].value.verses.split(';'))
         }
         catch (err) {
             if (err.response) {
@@ -57,6 +66,26 @@ export default function Devotional() {
         setDevotionalState({ ...devotionalState, available_at: available_at.toISOString() })
         //eslint-disable-next-line
     }, [ available_at ])
+
+    useEffect(() => {
+        async function fecthList() {
+            const { chaptersCount } = (await api.get('bible/@' + bookMark.book)).data
+            const chapters = [];
+            for (let i = 1; i <= chaptersCount; i++) {
+                chapters.push(i);
+            }
+            setChapterList(chapters);
+            const { versesCount } = (await api.get(`bible/${bookMark.book}/@${bookMark.chapter}`)).data;
+            const verses = [];
+            for (let i = 1; i <= versesCount; i++) {
+                verses.push(i);
+            }
+            setVerseInList(verses);
+            setVerseOutList(verses.slice(bookMark.verseIn - 1));
+        }
+        fecthList();
+        //eslint-disable-next-line
+    }, [ bookMark ])
 
     if (redirect.status) return (<Redirect to={redirect.page} />);
 
@@ -99,15 +128,43 @@ export default function Devotional() {
                     />
                 </header>
                 <Verse>
-                    <p>Versículos base: (Separados por ";")
-                        <span>formato: "Livro.Capítulo:Versículo-Versículo"</span>
-                    </p>
-                    <input
-                        type="text"
-                        value={devotionalState.verses}
-                        onChange={handleChangeVerses}
-                    />
+                    <p>Versículos base:</p>
+                    <select id="book" onChange={handleChangeBook} value={bookMark.book}>
+                        {bookList.map((book, index) =>
+                            (<option value={book} key={index}>{book}</option>)
+                        )}
+                    </select>
+                    <select id="chapter" onChange={handleChangeChapter} value={bookMark.chapter}>
+                        {chapterList.map((chapter) =>
+                            (<option value={chapter} key={chapter}>{chapter}</option>)
+                        )}
+                    </select>
+                    <p>:</p>
+                    <select id="verseIn" onChange={handleChangeVerseIn} value={bookMark.verseIn}>
+                        {verseInList.map((verseIn) =>
+                            (<option value={verseIn} key={verseIn}>{verseIn}</option>)
+                        )}
+                    </select>
+                    <p> - </p>
+                    <select id="verseOut" onChange={handleChangeVerseOut} value={bookMark.verseOut}>
+                        {verseOutList.map((verseOut) =>
+                            (<option value={verseOut} key={verseOut}>{verseOut}</option>)
+                        )}
+                    </select>
+                    <button onClick={handleAddVerse} >+</button>
                 </Verse>
+                <ul>
+                    {versesList.map((item, index) => (
+                        <li key={index}>
+                            <span>{item}</span>
+                            <button onClick={() => handleDeleteVerse(index)}>-</button>
+                        </li>
+                    ))}
+                </ul>
+                <input
+                    type="text"
+                    value={devotionalState.verses}
+                />
                 <p>Conteúdo:</p>
                 <textarea
                     value={devotionalState.content}
@@ -130,18 +187,49 @@ export default function Devotional() {
         return (
             <form>
                 <input type='radio' id="visible" name="visibility"
-                    value={1}
-                    checked={(devotionalState.visible === 1) ? true : false}
+                    value={true}
+                    checked={devotionalState.visible}
                     onChange={handleChangeVisibility} />
                 <label htmlFor="visible">Publicado </label>
 
                 <input type='radio' id="hidden" name="visibility"
-                    value={0}
-                    checked={(devotionalState.visible === 0) ? true : false}
+                    value={false}
+                    checked={!devotionalState.visible}
                     onChange={handleChangeVisibility} />
                 <label htmlFor="hidden">Não Publicado</label>
             </form>
         )
+    }
+
+    function handleChangeBook(e) {
+        setBookMark({ book: e.target.value, chapter: '1', verseIn: '1', verseOut: '1' })
+    }
+
+    async function handleChangeChapter(e) {
+        setBookMark({ ...bookMark, chapter: e.target.value, verseIn: '1', verseOut: '1' });
+    }
+
+    async function handleChangeVerseIn(e) {
+        const verseOut = e.target.value > bookMark.verseOut ? e.target.value : bookMark.verseOut;
+        setBookMark({ ...bookMark, verseIn: e.target.value, verseOut });
+    }
+
+    function handleChangeVerseOut(e) {
+        setBookMark({ ...bookMark, verseOut: e.target.value });
+    }
+
+    function handleAddVerse() {
+        const { book, chapter, verseIn, verseOut } = bookMark;
+        const newVerse = `${book}.${chapter}:${verseIn}-${verseOut}`;
+        const newVersesList = [ ...versesList, newVerse ];
+        setVersesList(newVersesList);
+        setDevotionalState({ ...devotionalState, verses: newVersesList.join(';') })
+    }
+
+    function handleDeleteVerse(indexToDelete) {
+        const newVersesList = versesList.filter((item, index) => index !== indexToDelete);
+        setVersesList(newVersesList);
+        setDevotionalState({ ...devotionalState, verses: newVersesList.join(';') });
     }
 
     function DeleteButton() {
@@ -222,14 +310,11 @@ export default function Devotional() {
     function handleChangeTitle(e) {
         setDevotionalState({ ...devotionalState, title: e.target.value });
     }
-    function handleChangeVerses(e) {
-        setDevotionalState({ ...devotionalState, verses: e.target.value });
-    }
     function handleChangeDevotionalContent(e) {
         setDevotionalState({ ...devotionalState, content: e.target.value });
     }
     function handleChangeVisibility(e) {
-        setDevotionalState({ ...devotionalState, visible: Number(e.target.value) });
+        setDevotionalState({ ...devotionalState, visible: (e.target.value === 'true') });
     }
 
 }

@@ -26,6 +26,30 @@ export const Content = styled.div`
         border-radius:5px;
         border:none;
     }
+    ul {
+        list-style:none;
+        align-self:flex-start;
+        min-width:200px;
+        li {
+            display:flex;
+            justify-content:space-between;
+            margin: 10px 0;
+        }
+        button {
+            border:none;
+            border-radius:5px;
+            background:${props => props.theme.colors.primary};
+            color:${props => props.theme.colors.backgroundSecondary};
+            padding: 5px 10px;
+            align-self:center;
+            transition:0.3s;
+            :hover {
+                background:${props => props.theme.colors.effect};
+                color:${props => props.theme.colors.background};
+                filter:drop-shadow(0 0 3px ${props => props.theme.colors.effect});
+            }
+        }
+    }
 `
 export const Author = styled.div`
     display:flex;
@@ -50,23 +74,41 @@ export const Title = styled.div`
 `
 
 export const Verse = styled.div`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
     width:100%;
     padding:20px 0;
     & p {
-       display:flex;
-       flex-direction:column;
-       text-align:left;
-       & span {
-           font-size:1.3rem;
-           color: ${props => props.theme.colors.secondary};
-       }
+        display:flex;
+        flex-direction:column;
+        text-align:left;
+        margin:0 5px;
+        & span {
+            font-size:1.3rem;
+            color: ${props => props.theme.colors.secondary};
+        }
     }
-    & input {
-        width:100%;
+    & select {
+        margin:0 5px;
         padding:5px;
         border-radius:5px;
         border:none;
     }
+    & button {
+            border:none;
+            border-radius:5px;
+            background:${props => props.theme.colors.primary};
+            color:${props => props.theme.colors.backgroundSecondary};
+            padding: 5px 10px;
+            align-self:center;
+            transition:0.3s;
+            :hover {
+                background:${props => props.theme.colors.effect};
+                color:${props => props.theme.colors.background};
+                filter:drop-shadow(0 0 3px ${props => props.theme.colors.effect});
+            }
+        }
 `
 
 export const Footer = styled.div`
@@ -80,17 +122,18 @@ export const Footer = styled.div`
             color:${props => props.theme.colors.effect}
         }
         button {
-        border:none;
-        border-radius:5px;
-        background:${props => props.theme.colors.primary};
-        color:${props => props.theme.colors.backgroundSecondary};
-        padding: 5px 10px;
-        align-self:center;
-        transition:0.3s;
-        :hover {
-            background:${props => props.theme.colors.effect};
-            color:${props => props.theme.colors.background};
-            filter:drop-shadow(0 0 3px ${props => props.theme.colors.effect});
+            border:none;
+            border-radius:5px;
+            background:${props => props.theme.colors.primary};
+            color:${props => props.theme.colors.backgroundSecondary};
+            padding: 5px 10px;
+            align-self:center;
+            transition:0.3s;
+            :hover {
+                background:${props => props.theme.colors.effect};
+                color:${props => props.theme.colors.background};
+                filter:drop-shadow(0 0 3px ${props => props.theme.colors.effect});
+            }
         }
     }
 `
@@ -117,6 +160,22 @@ export const Section = styled.section`
     }
     
 `
+export const Dropdown = styled.ul`
+    position: sticky;
+    z-index:2;
+    top:0;
+    left:0;
+    right:0;
+    max-width:1280px;
+    margin: 0 auto;
+    padding: 15px 0 15px 25px;
+    display:grid;
+    grid-template-columns: 40% 45% 15%;
+    gap:10px;
+    background-color:${props => props.theme.colors.background};
+    border-radius: 8px;
+`
+
 export const DropdownDevotional = styled.ul`
     display:block;
     z-index:0;
