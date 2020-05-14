@@ -116,15 +116,15 @@ export default function Devotional() {
             value={cellState.weekday}
             onChange={handleChangeWeekday}
           >
-            <option value={0}>domingo</option>
-            <option value={1}>segunda-feira</option>
-            <option value={2}>terça-feira</option>
-            <option value={3}>quarta-feira</option>
-            <option value={4}>quinta-feira</option>
-            <option value={5}>sexta-feira</option>
-            <option value={6}>sábado</option>
+            <option value={0}>Domingo</option>
+            <option value={1}>Segunda-feira</option>
+            <option value={2}>Terça-feira</option>
+            <option value={3}>Quarta-feira</option>
+            <option value={4}>Quinta-feira</option>
+            <option value={5}>Sexta-feira</option>
+            <option value={6}>Sábado</option>
           </select>
-          <p>Hora</p>
+          <p>Horário</p>
           <input
             type="text"
             value={cellState.hour}
@@ -144,11 +144,12 @@ export default function Devotional() {
           />
           <p>Tipo</p>
           <select id="type" value={cellState.type} onChange={handleChangeType}>
-            <option value="mista">mista</option>
-            <option value="de casais">casais</option>
-            <option value="de crianças">crianças</option>
-            <option value="de homens">homens</option>
-            <option value="de mulheres">mulheres</option>
+            <option value="Mista">Mista</option>
+            <option value="de Casais">Casais</option>
+            <option value="de Crianças">Crianças</option>
+            <option value="de Homens">Homens</option>
+            <option value="de Mulheres">Mulheres</option>
+            <option value="da Terceira Idade">Terceira Idade</option>
           </select>
           <input
             id="image"
