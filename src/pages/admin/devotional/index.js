@@ -14,7 +14,7 @@ import { DropdownDevotional, DropdownItem, Section, Title, Author, Content, Vers
 export default function Devotional() {
     const [ dropdownSelectedIndex, setDropdownSelectedIndex ] = useState(0);
     const [ available_at, setAvailable_at ] = useState(new Date());
-    const [ devotionalState, setDevotionalState ] = useState({ available_at: new Date(), title: '', verses: '', content: '' });
+    const [ devotionalState, setDevotionalState ] = useState({ available_at: new Date(), title: '', verses: '', content: '', visible: false });
     const [ dropDownDevotionalArray, setDropDownDevotionalArray ] = useState([ { value: '', label: '' } ]);
     const [ loading, setLoading ] = useState({ status: false, message: '' });
     const { userAccess, userInfo } = useContext(UserContext);
