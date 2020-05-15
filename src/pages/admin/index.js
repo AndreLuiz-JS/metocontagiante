@@ -14,6 +14,7 @@ import AddDevotional from './devotional/new';
 import Cell from './cell';
 import AddCell from './cell/new';
 import Advert from './advert';
+import Carousel from './carousel';
 
 import api from '../../services/api';
 
@@ -70,6 +71,7 @@ export default function Admin() {
                     <Route exact path="/admin/cell" component={Cell} />
                     <Route exact path="/admin/cell/new" component={AddCell} />
                     <Route exact path="/admin/advert" component={Advert} />
+                    <Route exact path="/admin/carousel" component={Carousel} />
                 </Switch>
             </UserContext.Provider>
         </Container >
