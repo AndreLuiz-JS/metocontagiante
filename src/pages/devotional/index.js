@@ -5,29 +5,30 @@ import normalizeDate from "../../services/normalizeDate";
 import { Section, Verses, DevotionalContent } from "./styles";
 
 export default function Devotional() {
-  const [loading, setLoading] = useState({
+  const [ loading, setLoading ] = useState({
     status: true,
     message: "Carregando",
   });
-  const [devotionalContent, setDevotionalContent] = useState({
+  const [ devotionalContent, setDevotionalContent ] = useState({
     title: "",
     verses: [],
     content: [],
     verseContent: [],
     date: "",
   });
-  const [showVerses, setShowVerses] = useState(true);
+  const [ showVerses, setShowVerses ] = useState(true);
   async function getDevotional() {
-    const devotional = await api.get("/devotional");
-    if (!devotional.data.content) {
+    const devotionals = await api.get("/devotional");
+    const devotional = devotionals.data[ 0 ];
+    if (!devotional.content) {
       setDevotionalContent({ hasDevotional: false });
       setLoading({ status: false });
       return null;
     }
-    const title = devotional.data.title;
-    const content = devotional.data.content.split(/(?:\r\n|\r|\n)/g);
+    const title = devotional.title;
+    const content = devotional.content.split(/(?:\r\n|\r|\n)/g);
     const hasDevotional = content ? true : false;
-    const date = normalizeDate(devotional.data.available_at);
+    const date = normalizeDate(devotional.available_at);
     const { verses, verseContent } = await getVerses();
     setDevotionalContent({
       title,
@@ -39,35 +40,34 @@ export default function Devotional() {
     });
     async function getVerses() {
       try {
-        if (!devotional.data.verses) {
+        if (!devotional.verses) {
           setShowVerses(false);
           setLoading({ status: false });
           return { verses: [], verseContent: [] };
         }
 
-        const bibleIndexes = devotional.data.verses.split(";");
+        const bibleIndexes = devotional.verses.split(";");
         const verseContent = new Array(bibleIndexes.length);
         const verses = new Array(bibleIndexes.length);
         for (let i = 0; i < bibleIndexes.length; i++) {
-          const book = bibleIndexes[i].split(".");
-          const chapter = book[1].split(":");
-          const verseRange = chapter[1];
+          const book = bibleIndexes[ i ].split(".");
+          const chapter = book[ 1 ].split(":");
+          const verseRange = chapter[ 1 ];
           const content = await api.get(
-            `/bible/${book[0]}/${chapter[0]}/${verseRange}`
+            `/bible/${book[ 0 ]}/${chapter[ 0 ]}/${verseRange}`
           );
-          console.log(content);
           if (!content.data) {
             setShowVerses(false);
             setLoading({ status: false });
             return { verses: [], verseContent: [] };
           }
-          verseContent[i] = content.data;
-          const verseInit = verseRange.split("-")[0];
-          const verseEnd = verseRange.split("-")[1];
+          verseContent[ i ] = content.data;
+          const verseInit = verseRange.split("-")[ 0 ];
+          const verseEnd = verseRange.split("-")[ 1 ];
           if (verseInit === verseEnd) {
-            verses[i] = `${book[0]} ${chapter[0]} : ${verseInit}`;
+            verses[ i ] = `${book[ 0 ]} ${chapter[ 0 ]} : ${verseInit}`;
           } else {
-            verses[i] = `${book[0]} ${chapter[0]} : ${verseRange}`;
+            verses[ i ] = `${book[ 0 ]} ${chapter[ 0 ]} : ${verseRange}`;
           }
         }
         setLoading({ status: false });
@@ -103,7 +103,7 @@ export default function Devotional() {
             return (
               <div key={index}>
                 <h1>{verse}</h1>
-                {devotionalContent.verseContent[index].map(
+                {devotionalContent.verseContent[ index ].map(
                   (paragraph, paragraphIndex) => (
                     <p key={paragraphIndex}>
                       {paragraph.map((verse, verseIndex) => (
