@@ -18,7 +18,7 @@ export default function CellStudy() {
           const { data } = await api.get("/cellstudy");
           const file = "data:application/pdf;base64," + data.pdf;
           localStorage.setItem("cellstudy.time", data.mtime);
-          localStorage.setItem("cellstudy.pdf", pdf);
+          localStorage.setItem("cellstudy.pdf", file);
           setpdf(file);
         } else {
           const { data } = await api.get("/cellstudy/time");
@@ -26,7 +26,7 @@ export default function CellStudy() {
             const { data } = await api.get("/cellstudy");
             const file = "data:application/pdf;base64," + data.pdf;
             localStorage.setItem("cellstudy.time", data.mtime);
-            localStorage.setItem("cellstudy.pdf", pdf);
+            localStorage.setItem("cellstudy.pdf", file);
             setpdf(file);
           } else {
             setpdf(localStorage.getItem("cellstudy.pdf"));
