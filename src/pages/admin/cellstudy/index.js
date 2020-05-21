@@ -2,34 +2,34 @@ import React, { useEffect, useState, useContext } from "react";
 
 import api from "../../../services/api";
 import Loading from '../../../components/Loading'
-import { UserContext } from "../";
-import { Section } from "./styles";
+import { UserContext } from "..";
+import { Section } from "../advert/styles";
 
-export default function Advert() {
-  const [ jpg, setJpg ] = useState("");
+export default function CellStudy() {
+  const [ pdf, setpdf ] = useState("");
   const [ loading, setLoading ] = useState({ status: true, message: 'carregando página' });
   const { userInfo } = useContext(UserContext);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const localjpgFileTime = localStorage.getItem("advert.time");
-        if (!localjpgFileTime) {
-          const { data } = await api.get("/advert");
-          const jpg = "data:image/jpg;base64," + data.jpg;
-          localStorage.setItem("advert.time", data.mtime);
-          localStorage.setItem("advert.jpg", jpg);
-          setJpg(jpg);
+        const localpdfFileTime = localStorage.getItem("cellstudy.time");
+        if (!localpdfFileTime) {
+          const { data } = await api.get("/cellstudy");
+          const file = "data:application/pdf;base64," + data.pdf;
+          localStorage.setItem("cellstudy.time", data.mtime);
+          localStorage.setItem("cellstudy.pdf", pdf);
+          setpdf(file);
         } else {
-          const { data } = await api.get("/advert/time");
-          if (localjpgFileTime !== data.mtime) {
-            const { data } = await api.get("/advert");
-            const jpg = "data:image/jpg;base64," + data.jpg;
-            localStorage.setItem("advert.time", data.mtime);
-            localStorage.setItem("advert.jpg", jpg);
-            setJpg(jpg);
+          const { data } = await api.get("/cellstudy/time");
+          if (localpdfFileTime !== data.mtime) {
+            const { data } = await api.get("/cellstudy");
+            const file = "data:application/pdf;base64," + data.pdf;
+            localStorage.setItem("cellstudy.time", data.mtime);
+            localStorage.setItem("cellstudy.pdf", pdf);
+            setpdf(file);
           } else {
-            setJpg(localStorage.getItem("advert.jpg"));
+            setpdf(localStorage.getItem("cellstudy.pdf"));
           }
         }
       } catch (err) {
@@ -40,30 +40,30 @@ export default function Advert() {
     fetchData();
   }, []);
 
-  function handleChangejpg(e) {
+  function handleChangepdf(e) {
     setLoading({ status: true, message: 'carregando arquivo' })
-    const file = getJpg(e.target.files);
+    const file = getpdf(e.target.files);
     const reader = new FileReader();
     reader.onloadend = () => {
-      if (reader.result === jpg) {
+      if (reader.result === pdf) {
         setLoading({ status: true, message: 'Este arquivo já está carregado', ico: 'pulse' })
         setTimeout(() => setLoading({ status: false }, 1000));
       }
-      setJpg(reader.result);
+      setpdf(reader.result);
     };
     reader.readAsDataURL(file);
 
-    function getJpg(inputFiles) {
+    function getpdf(inputFiles) {
       if (inputFiles.length !== 0) {
         for (let i = 0; i < inputFiles.length; i++) {
-          if ([ "image/jpg", "image/jpeg" ].indexOf(inputFiles[ i ].type) !== -1)
+          if (inputFiles[ i ].type === 'application/pdf')
             return inputFiles[ i ];
         }
       }
     }
   }
 
-  async function handleSubmitAdvert(e) {
+  async function handleSubmitcellstudy(e) {
     e.preventDefault();
     const file = e.target[ 0 ].files[ 0 ];
     if (!file) {
@@ -74,7 +74,7 @@ export default function Advert() {
     const formData = new FormData();
     formData.append("file", file);
     try {
-      const response = await api.post("/advert", formData, {
+      const response = await api.post("/cellstudy", formData, {
         headers: {
           Authorization: 'Bearer ' + userInfo.token,
           'Content-Type': 'multipart/form-data',
@@ -94,11 +94,11 @@ export default function Advert() {
     <>
       <Loading loading={loading.status} message={loading.message} ico={loading.ico} />
       <Section>
-        <form id="advert" encType="multipart/form-data" onSubmit={handleSubmitAdvert}>
+        <form id="cellstudy" encType="multipart/form-data" onSubmit={handleSubmitcellstudy}>
           <input
             type="file"
-            accept="image/jpeg"
-            onChange={handleChangejpg}
+            accept="application/pdf"
+            onChange={handleChangepdf}
             id="file"
             name="file"
           />
@@ -106,8 +106,9 @@ export default function Advert() {
         </form>
         <embed
           width="100%"
-          src={jpg}
-          type="image/jpg"
+          height="700px"
+          src={pdf}
+          type="application/pdf"
           onChange={() => setTimeout(() => setLoading({ status: false }, 1000))}
           onLoad={() => setLoading({ status: false })}
         />
