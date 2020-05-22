@@ -89,11 +89,14 @@ export default function Devotional() {
           />
           <p>Tipo</p>
           <select id="type" value={cellState.type} onChange={handleChangeType}>
-            <option value="mista">mista</option>
-            <option value="de casais">casais</option>
-            <option value="de crianças">crianças</option>
-            <option value="de homens">homens</option>
-            <option value="de mulheres">mulheres</option>
+            <option value="Mista">Mista</option>
+            <option value="de Casais">Casais</option>
+            <option value="de Crianças">Crianças</option>
+            <option value="de Homens">Homens</option>
+            <option value="de Mulheres">Mulheres</option>
+            <option value="da Terceira Idade">Terceira Idade</option>
+            <option value="de Jovens">Jovens</option>
+            <option value="de Juvenis">Juvenis</option>
           </select>
           <input
             id="image"

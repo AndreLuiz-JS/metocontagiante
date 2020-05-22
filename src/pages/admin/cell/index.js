@@ -150,6 +150,8 @@ export default function Devotional() {
             <option value="de Homens">Homens</option>
             <option value="de Mulheres">Mulheres</option>
             <option value="da Terceira Idade">Terceira Idade</option>
+            <option value="de Jovens">Jovens</option>
+            <option value="de Juvenis">Juvenis</option>
           </select>
           <input
             id="image"
