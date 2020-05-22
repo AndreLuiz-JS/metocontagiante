@@ -159,7 +159,10 @@ export default function Devotional() {
             accept="image/png,image/jpeg"
             onChange={handleChangeImage}
           />
-          <img src={cellState.image} alt="" />
+          {(cellState.image !== '') && (<div>
+            <button onClick={() => setCellState({ ...cellState, image: '' })}>X</button>
+            <img src={cellState.image} alt="" />
+          </div>)}
         </Form>
 
         <Footer>

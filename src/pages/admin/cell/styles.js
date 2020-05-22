@@ -55,10 +55,33 @@ export const Form = styled.div`
   input[file] {
     padding: 20px;
   }
-  img {
-    border-radius: 10px;
+  div{
+    display:flex;
+    justify-content:right;
+    align-items:flex-start;
     width: 50%;
     margin: 0 auto;
+    min-width:500px;
+    button {
+      position:absolute;
+      margin: 20px 20px 0 0;
+      width:25px;
+      height:25px;
+      border-radius:3px;
+      border:solid 2px ${props => props.theme.colors.effect};
+      transition: 0.3s;
+      background:${props => props.theme.colors.effect + '88'};
+      color:${props => props.theme.colors.backgroundSecondary};
+      :hover {
+          background:${props => props.theme.colors.effect};
+          color:${props => props.theme.colors.background};
+          border:solid 3px ${props => props.theme.colors.effect + '88'};
+          filter:drop-shadow(0 0 3px ${props => props.theme.colors.effect});
+      }
+    }
+    img {
+      border-radius: 10px;
+    }
   }
 `;
 
