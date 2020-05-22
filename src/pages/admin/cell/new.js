@@ -13,7 +13,7 @@ export default function Devotional() {
     image: "",
     name: "",
     leader: "",
-    phone: "(22) 9 9999-9999",
+    phone: "55 (22) 9 9999-9999",
     location: "",
     weekday: 4,
     hour: "20h",
