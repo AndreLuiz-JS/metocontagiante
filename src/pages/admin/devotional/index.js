@@ -297,6 +297,11 @@ export default function Devotional() {
         setDropdownSelectedIndex(dropDownDevotionalArray.findIndex(item => item.value === selectedState.value));
         setDevotionalState(selectedState.value);
         setAvailable_at(new Date(selectedState.value.available_at))
+        if (selectedState.value.verses) {
+            setVersesList(selectedState.value.verses.split(';'));
+        } else {
+            setVersesList([]);
+        }
     }
     function normalizeToDropdown(value) {
         const data = normalizeDate(value.available_at);
