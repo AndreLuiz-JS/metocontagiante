@@ -7,11 +7,11 @@ import { Form } from "./styles";
 import api from "../../services/api";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [statusMessage, setStatusMessage] = useState("");
-  const [loading, setLoading] = useState({ status: false, message: "" });
-  const [redirectToAdmin, setRedirectToAdmin] = useState(false);
+  const [ email, setEmail ] = useState("");
+  const [ password, setPassword ] = useState("");
+  const [ statusMessage, setStatusMessage ] = useState("");
+  const [ loading, setLoading ] = useState({ status: false, message: "" });
+  const [ redirectToAdmin, setRedirectToAdmin ] = useState(false);
 
   useEffect(() => {
     const localToken = localStorage.getItem("ACCESS_TOKEN");
@@ -39,7 +39,7 @@ export default function Login() {
       setStatusMessage('Seu endereço de e-mail deve conter uma "@"');
       return false;
     }
-    const [user, domain] = email.split("@");
+    const [ user, domain ] = email.split("@");
     if (user.length < 3) {
       setStatusMessage(
         'Seu usuário antes da "@" deve conter pelo menos 3 caracteres.'
@@ -52,7 +52,7 @@ export default function Login() {
       );
       return false;
     }
-    const [server, topDomain] = domain.split(".");
+    const [ server, topDomain ] = domain.split(".");
     if (server.length < 3) {
       setStatusMessage(
         'O servidor de email após "@" deve conter pelo menos 3 caracteres'
@@ -99,6 +99,7 @@ export default function Login() {
           <button onClick={handleSubmit}>Login</button>
           <span>
             Ainda não tem cadastro? <NavLink to="/signup">Cadastre-se</NavLink>
+            <br /><NavLink to='/lostPwd'>Esqueci minha senha</NavLink>
           </span>
         </div>
         <div>

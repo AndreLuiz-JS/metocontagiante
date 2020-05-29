@@ -10,7 +10,7 @@ export const Form = styled.form`
     border-radius: 10px;
     margin: 30px auto;
     padding: 30px;
-    text-align:right;
+    text-align:center;
     text-indent: 4rem;
     background-color:${props => props.theme.colors.backgroundSecondary};
     & div {

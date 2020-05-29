@@ -7,12 +7,13 @@ import Podcast from './pages/podcast';
 import Devotional from './pages/devotional';
 import Contact from './pages/contact';
 import Login from './pages/login';
+import ChangePwd from './pages/changePassword';
+import LostPwd from './pages/lostPassword';
 import SignUp from './pages/login/signUp';
 import Admin from './pages/admin';
 
 const Routes = () => (
     <Switch>
-        <Route exact path="/" component={Main} />
         <Route path="/bible" component={Bible} />
         <Route path="/maps" component={Maps} />
         <Route path="/podcast" component={Podcast} />
@@ -20,8 +21,12 @@ const Routes = () => (
         <Route path="/contact" component={Contact} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/lostPwd" component={LostPwd} />
 
         <Route path="/admin" component={Admin} />
+
+        <Route path="/:token" component={ChangePwd} />
+        <Route path="/" component={Main} />
     </Switch>
 )
 
