@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
-import Loading from "../../../components/Loading";
-import Postbutton from "../../../components/Postbutton";
+import Loading from "../../../../components/Loading";
+import Postbutton from "../../../../components/Postbutton";
 
-import { UserContext } from "..";
-import api from "../../../services/api";
+import api from "../../../../services/api";
 
 import {
   DropdownCell,
@@ -16,7 +15,7 @@ import {
   Footer,
 } from "./styles";
 
-export default function Devotional() {
+export default function Devotional(props) {
   const [ dropdownSelectedIndex, setDropdownSelectedIndex ] = useState(0);
   const [ cellState, setCellState ] = useState({
     id: "",
@@ -33,7 +32,7 @@ export default function Devotional() {
     { value: "", label: "" },
   ]);
   const [ loading, setLoading ] = useState({ status: false, message: "" });
-  const { userAccess, userInfo } = useContext(UserContext);
+  const { userAccess, userInfo } = useContext(props.UserContext);
   const [ redirect, setRedirect ] = useState({ status: false, page: "/login" });
 
   async function fetchData() {

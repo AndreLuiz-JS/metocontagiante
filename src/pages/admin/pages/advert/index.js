@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 
-import api from "../../../services/api";
-import Loading from '../../../components/Loading'
-import { UserContext } from "../";
+import api from "../../../../services/api";
+import Loading from '../../../../components/Loading'
 import { Section } from "./styles";
 
-export default function Advert() {
+export default function Advert(props) {
   const [ jpg, setJpg ] = useState("");
   const [ loading, setLoading ] = useState({ status: true, message: 'carregando página' });
-  const { userInfo } = useContext(UserContext);
+  const { userInfo } = useContext(props.UserContext);
 
   useEffect(() => {
     async function fetchData() {

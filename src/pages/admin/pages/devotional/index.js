@@ -2,22 +2,21 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import Calendar from 'react-datetime-picker';
-import Loading from '../../../components/Loading';
-import Postbutton from '../../../components/Postbutton';
+import Loading from '../../../../components/Loading';
+import Postbutton from '../../../../components/Postbutton';
 
-import { UserContext } from '../';
-import api from '../../../services/api';
-import normalizeDate from '../../../services/normalizeDate';
+import api from '../../../../services/api';
+import normalizeDate from '../../../../services/normalizeDate';
 
 import { DropdownDevotional, DropdownItem, Section, Title, Author, Content, Verse, Footer } from './styles';
 
-export default function Devotional() {
+export default function Devotional(props) {
     const [ dropdownSelectedIndex, setDropdownSelectedIndex ] = useState(0);
     const [ available_at, setAvailable_at ] = useState(new Date());
     const [ devotionalState, setDevotionalState ] = useState({ available_at: new Date(), title: '', verses: '', content: '', visible: false });
     const [ dropDownDevotionalArray, setDropDownDevotionalArray ] = useState([ { value: '', label: '' } ]);
     const [ loading, setLoading ] = useState({ status: false, message: '' });
-    const { userAccess, userInfo } = useContext(UserContext);
+    const { userAccess, userInfo } = useContext(props.UserContext);
     const [ redirect, setRedirect ] = useState({ status: false, page: '/login' });
     const [ bookList, setBookList ] = useState([]);
     const [ chapterList, setChapterList ] = useState([]);

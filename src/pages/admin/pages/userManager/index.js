@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { UserContext } from '../';
+import api from '../../../../services/api';
 
-import api from '../../../services/api';
-
-import Loading from '../../../components/Loading';
+import Loading from '../../../../components/Loading';
 
 import { Section, Content, Radio, DropdownUsers, DropdownItem, Dialog } from './styles';
 
-export default function ManageUsers() {
-    const { userInfo, userAccess } = useContext(UserContext);
+export default function ManageUsers(props) {
+    const { userInfo, userAccess } = useContext(props.UserContext);
     const [ loading, setLoading ] = useState({ status: false, message: '' });
     const [ usersTypes, setUsersTypes ] = useState([]);
     const [ dropDownUsersArray, setDropdownUsersArray ] = useState([ { value: {}, label: '' } ]);

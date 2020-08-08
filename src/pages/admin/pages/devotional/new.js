@@ -2,18 +2,17 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import Calendar from 'react-datetime-picker';
-import Loading from '../../../components/Loading';
+import Loading from '../../../../components/Loading';
 
-import { UserContext } from '../';
-import api from '../../../services/api';
+import api from '../../../../services/api';
 
 import { Section, Title, Content, Verse, Footer } from './styles';
 
-export default function Devotional() {
+export default function Devotional(props) {
     const [ available_at, setAvailable_at ] = useState(new Date());
     const [ devotionalState, setDevotionalState ] = useState({ available_at: new Date(), title: '', verses: '', content: '', visible: 0 });
     const [ loading, setLoading ] = useState({ status: false, message: '' });
-    const { userInfo, userAccess } = useContext(UserContext);
+    const { userInfo, userAccess } = useContext(props.UserContext);
     const [ redirect, setRedirect ] = useState({ status: false, page: '/login' });
     const [ bookList, setBookList ] = useState([]);
     const [ chapterList, setChapterList ] = useState([]);

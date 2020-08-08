@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 
-import api from "../../../services/api";
-import Loading from '../../../components/Loading'
-import { UserContext } from "..";
+import api from "../../../../services/api";
+import Loading from '../../../../components/Loading'
 import { Section } from "../advert/styles";
 
-export default function CellStudy() {
+export default function CellStudy(props) {
   const [ pdf, setpdf ] = useState("");
   const [ loading, setLoading ] = useState({ status: true, message: 'carregando página' });
-  const { userInfo } = useContext(UserContext);
+  const { userInfo } = useContext(props.UserContext);
 
   useEffect(() => {
     async function fetchData() {

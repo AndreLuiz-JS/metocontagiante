@@ -1,14 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { UserContext } from '../';
-
-import api from '../../../services/api';
+import api from '../../../../services/api';
 
 import { Dialog } from './styles';
 
 
-export default function PasswordDialog({ name, email, newPassword, disabled, reference, setloading: setLoading }) {
-    const { userInfo } = useContext(UserContext);
+export default function PasswordDialog({ name, email, newPassword, disabled, reference, setloading: setLoading, userInfo }) {
     const [ password, setPassword ] = useState('');
     const [ active, setActive ] = useState(false);
 

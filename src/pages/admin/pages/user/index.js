@@ -1,14 +1,13 @@
 import React, { useState, useContext } from 'react';
 
-import { UserContext } from '../';
 import PasswordDialog from './passwordDialog';
-import Loading from '../../../components/Loading';
+import Loading from '../../../../components/Loading';
 
 
 import { Section, Header, Form } from './styles';
 
-export default function Home(props) {
-    const { userInfo } = useContext(UserContext);
+export default function User(props) {
+    const { userInfo } = useContext(props.UserContext);
     const [ newName, setNewName ] = useState(userInfo.name);
     const [ newEmail, setNewEmail ] = useState(userInfo.email);
     const [ newPassword, setNewPassword ] = useState('');
@@ -34,18 +33,18 @@ export default function Home(props) {
                     onChange={handleChangeName}
                     onFocus={handleChangeName}
                 />
-                <PasswordDialog setloading={setLoading} name={newName} disabled={disabledNameButton} reference={'name'} />
+                <PasswordDialog userInfo={userInfo} setloading={setLoading} name={newName} disabled={disabledNameButton} reference={'name'} />
 
                 <label htmlFor="newEmail">novo E-mail:</label>
                 <input type="email" name="newEmail" id="newEmail" value={newEmail} onChange={handleChangeEmail} onFocus={handleChangeEmail} />
-                <PasswordDialog setloading={setLoading} email={newEmail} disabled={disabledEmailButton} reference='email' />
+                <PasswordDialog userInfo={userInfo} setloading={setLoading} email={newEmail} disabled={disabledEmailButton} reference='email' />
                 <div><h2>Troca de senha</h2></div>
                 <label htmlFor="newPassword">nova senha:</label>
                 <input type="password" name="newPassword" id="newPassword" value={newPassword} onChange={handleChangePassword} onFocus={handleChangePassword} />
                 <span></span>
                 <label htmlFor="newPasswordConfirm">confirme nova senha:</label>
                 <input type="password" name="newPasswordConfirm" id="newPasswordConfirm" value={newPasswordConfirm} onChange={handleChangePasswordConfirm} onFocus={handleChangePasswordConfirm} />
-                <PasswordDialog setloading={setLoading} newPassword={newPassword} disabled={disabledPasswordButton} reference='pass' />
+                <PasswordDialog userInfo={userInfo} setloading={setLoading} newPassword={newPassword} disabled={disabledPasswordButton} reference='pass' />
 
                 <div><p id="statusMessage">{statusMessage}</p></div>
             </Form>

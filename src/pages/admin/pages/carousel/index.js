@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import Loading from '../../../components/Loading';
-import api from '../../../services/api';
-import { UserContext } from '../';
+import Loading from '../../../../components/Loading';
+import api from '../../../../services/api';
 
 import { Section, Content } from './styles';
-export default function Carousel() {
-    const { userAccess, userInfo } = useContext(UserContext);
+
+export default function Carousel(props) {
+    const { userAccess, userInfo } = useContext(props.UserContext);
     const [ imageList, setImageList ] = useState([]);
     const [ loading, setLoading ] = useState({ status: false, message: '' });
     const [ redirect, setRedirect ] = useState({ status: false, page: '/login' });

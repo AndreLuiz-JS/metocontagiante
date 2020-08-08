@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
-import Loading from "../../../components/Loading";
+import Loading from "../../../../components/Loading";
 
-import { UserContext } from "..";
-import api from "../../../services/api";
+import api from "../../../../services/api";
 
 import { Section, Form, Content, Footer } from "./styles";
 
-export default function Devotional() {
+export default function Devotional(props) {
   const [ cellState, setCellState ] = useState({
     image: "",
     name: "",
@@ -20,7 +19,7 @@ export default function Devotional() {
     type: "mista",
   });
   const [ loading, setLoading ] = useState({ status: false, message: "" });
-  const { userAccess, userInfo } = useContext(UserContext);
+  const { userAccess, userInfo } = useContext(props.UserContext);
   const [ redirect, setRedirect ] = useState({ status: false, page: "/login" });
 
   useEffect(() => {

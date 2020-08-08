@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
-import { UserContext } from "../../../../pages/admin";
+import { UserContext } from "../../../../index";
 import links from "../../links";
 
 import { CollapseWrapper, NavLinks } from "./styles";

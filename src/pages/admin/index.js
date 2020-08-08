@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Navbar from '../../components/AdminNavbar';
+import Navbar from './components/AdminNavbar';
 import Loading from '../../components/Loading';
 
 import { Container } from './styles';
 
-import Home from './home';
-import User from './user';
-import UserManager from './userManager';
-import Devotional from './devotional';
-import AddDevotional from './devotional/new';
-import Cell from './cell';
-import AddCell from './cell/new';
-import Advert from './advert';
-import CellStudy from './cellstudy';
-import Carousel from './carousel';
+import Home from './pages/home';
+import User from './pages/user';
+import UserManager from './pages/userManager';
+import Devotional from './pages/devotional';
+import AddDevotional from './pages/devotional/new';
+import Cell from './pages/cell';
+import AddCell from './pages/cell/new';
+import Advert from './pages/advert';
+import CellStudy from './pages/cellstudy';
+import Carousel from './pages/carousel';
 
 import api from '../../services/api';
 
@@ -64,16 +64,16 @@ export default function Admin() {
                 <Navbar />
                 <Switch>
 
-                    <Route exact path="/admin" component={Home} />
-                    <Route exact path="/admin/user" component={User} />
-                    <Route exact path="/admin/user-manager" component={UserManager} />
-                    <Route exact path="/admin/devotional" component={Devotional} />
-                    <Route exact path="/admin/devotional/new" component={AddDevotional} />
-                    <Route exact path="/admin/cell" component={Cell} />
-                    <Route exact path="/admin/cell/new" component={AddCell} />
-                    <Route exact path="/admin/advert" component={Advert} />
-                    <Route exact path="/admin/cellstudy" component={CellStudy} />
-                    <Route exact path="/admin/carousel" component={Carousel} />
+                    <Route exact path="/admin" component={() => Home({ UserContext })} />
+                    <Route exact path="/admin/user" component={() => User({ UserContext })} />
+                    <Route exact path="/admin/user-manager" component={() => UserManager({ UserContext })} />
+                    <Route exact path="/admin/devotional" component={() => Devotional({ UserContext })} />
+                    <Route exact path="/admin/devotional/new" component={() => AddDevotional({ UserContext })} />
+                    <Route exact path="/admin/cell" component={() => Cell({ UserContext })} />
+                    <Route exact path="/admin/cell/new" component={() => AddCell({ UserContext })} />
+                    <Route exact path="/admin/advert" component={() => Advert({ UserContext })} />
+                    <Route exact path="/admin/cellstudy" component={() => CellStudy({ UserContext })} />
+                    <Route exact path="/admin/carousel" component={() => Carousel({ UserContext })} />
                 </Switch>
             </UserContext.Provider>
         </Container >

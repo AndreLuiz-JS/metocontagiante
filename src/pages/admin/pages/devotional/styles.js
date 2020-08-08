@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
 
-import theme from '../../../styles/themes/default';
+import theme from '../../../../styles/themes/default';
 
 
 
