@@ -1,39 +1,27 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { useSpring, animated } from 'react-spring';
 
 import { UserContext } from '../../pages/admin';
 import links from './links';
 
 const CollapseMenu = (props) => {
   const { userAccess, userInfo } = useContext(UserContext);
-  const { open } = useSpring({ open: props.navbarState ? 0 : 1 });
-  if (props.navbarState === true) {
-    return (
-      <CollapseWrapper style={{
-        transform: open.interpolate({
-          range: [ 0, 0.2, 0.3, 1 ],
-          output: [ 0, -20, 0, -200 ],
-        }).interpolate(openValue => `translate3d(${openValue}px,0, 0`),
-      }
-      }
+  return (
+    <CollapseWrapper className={props.navbarState === true ? '' : 'hidden'}>
+      <NavLinks>
+        <li key={links.length}><p>{userInfo.name} <button onClick={logout}>(sair)</button></p></li>
+        {links.map((link, index) => {
+          if (userAccess.includes(link.user_access))
+            return (
+              <li key={index} onClick={props.handleNavbar}><NavLink to={link.to}>{link.name}</NavLink></li>
+            )
+          return (null)
+        })}
+      </NavLinks>
+    </CollapseWrapper>
+  );
 
-      >
-        <NavLinks>
-          <li key={links.length}><p>{userInfo.name} <button onClick={logout}>(sair)</button></p></li>
-          {links.map((link, index) => {
-            if (userAccess.includes(link.user_access))
-              return (
-                <li key={index} onClick={props.handleNavbar}><NavLink to={link.to}>{link.name}</NavLink></li>
-              )
-            return (null)
-          })}
-        </NavLinks>
-      </CollapseWrapper>
-    );
-  }
-  return null;
   function logout() {
     localStorage.removeItem('ACCESS_TOKEN');
 
@@ -43,7 +31,7 @@ const CollapseMenu = (props) => {
 
 export default CollapseMenu;
 
-const CollapseWrapper = styled(animated.div)`
+const CollapseWrapper = styled.div`
   background: ${props => props.theme.colors.background}cc;
   position: fixed;
   border-radius: 12px;
@@ -51,9 +39,16 @@ const CollapseWrapper = styled(animated.div)`
   top: 70px;
   left: 0;
   z-index:3;
+  transition: transform 0.2s ease-in-out, opacity 0.3s ease-in;
+  transform: translateX(20px);
     @media (min-width: ${props => props.displayMaxSize}px) {
       display:none;
     }
+  &.hidden {
+    transform: translateX(-150px);
+    opacity: 0;
+    pointer-events:none;
+  }
 `;
 
 const NavLinks = styled.ul`

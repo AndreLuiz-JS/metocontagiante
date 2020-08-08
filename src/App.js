@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
@@ -10,17 +10,11 @@ import SocialMedia from './components/SocialMedia';
 import Routes from './routes';
 
 export default function App() {
-  const [ navbarState, setNavbarState ] = useState(false);
-  function handleNavbar() {
-    setNavbarState(!navbarState);
-  }
 
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Navbar
-          navbarState={navbarState}
-          handleNavbar={handleNavbar} />
+        <Navbar />
         <GlobalStyle />
         <Routes />
         <SocialMedia />
